@@ -3,19 +3,17 @@
 <!-- [Head] start -->
 
 <head>
-    <title>SignUp | Berry Bootstrap 5 Admin Template</title>
+    <title>RSUHARKEL | Registrasi</title>
     <!-- [Meta] -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description"
-        content="Berry is made using Bootstrap 5 design framework. Download the free admin template & use it for your project." />
-    <meta name="keywords"
-        content="Berry, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Bootstrap Admin Template" />
-    <meta name="author" content="CodedThemes" />
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-    <!-- [Favicon] icon -->
-    <link rel="icon" href="{{ asset('admin') }}/images/favicon.svg" type="image/x-icon" />
+    <!-- Favicons -->
+    <link href="{{ asset('homepage') }}/img/LOGO.png" rel="icon">
+    <link href="{{ asset('homepage') }}/img/LOGO.png" rel="apple-touch-icon">
     <!-- [Google Font] Family -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
         id="main-font-link" />

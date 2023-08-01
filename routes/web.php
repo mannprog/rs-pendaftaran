@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,13 +52,23 @@ Route::prefix('pelayanan/')->group(function () {
     });
 });
 
-Route::get('login', function() {
-    return view('auth.login');
-})->name('login');
-Route::get('registrasi', function() {
-    return view('auth.registrasi');
-})->name('registrasi');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'prosesLogin'])->name('prosesLogin');
+    Route::get('/registrasi', [AuthController::class, 'registrasi'])->name('registrasi');
+    Route::post('/registrasi', [AuthController::class, 'prosesRegistrasi'])->name('prosesRegistrasi');
+});
 
-Route::get('dashboard', function() {
-    return view('admin.dashboard');
-})->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::middleware('admin')->group(function () {
+        Route::get('dashboard', [DashboardController::class, 'indexAdmin'])->name('admin.dashboard');
+        Route::prefix('admin/')->group(function () {
+            Route::name('admin.')->group(function () {
+            });
+        });
+    });
+
+    Route::get('pasien', [DashboardController::class, 'indexPasien'])->name('pasien.dashboard');
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});

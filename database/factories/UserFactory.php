@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -34,5 +35,19 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (User $user) {
+            if ($user->id == 4) {
+                $user->detailPasien()->create([
+                    'tempat_lahir' => fake('id_ID')->city(),
+                    'tanggal_lahir' => fake('id_ID')->date(),
+                    'alamat' => fake('id_ID')->address(),
+                    'no_hp' => fake('id_ID')->phoneNumber(),
+                ]);
+            } 
+        });
     }
 }

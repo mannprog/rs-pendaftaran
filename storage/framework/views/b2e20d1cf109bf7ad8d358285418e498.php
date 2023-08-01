@@ -26,16 +26,37 @@
                         <li><a href="<?php echo e(route('pelayanan.poli.radiologi')); ?>">Poli Radiologi</a></li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#"><span>Pendaftaran</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="<?php echo e(route('registrasi')); ?>">Registrasi</a></li>
-                        <li><a href="<?php echo e(route('login')); ?>">Login</a></li>
-                    </ul>
-                </li>
                 <?php if(Route::currentRouteName() === 'homepage'): ?>
-                    <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                    <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
                 <?php else: ?>
-                    <li><a class="nav-link scrollto" href="<?php echo e(route('homepage')); ?>#contact">Contact</a></li>
+                    <li><a class="nav-link scrollto" href="<?php echo e(route('homepage')); ?>#contact">Kontak</a></li>
+                <?php endif; ?>
+                <?php if(Route::has('login')): ?>
+                    <?php if(auth()->guard()->check()): ?>
+                        <?php if(Auth::user()->is_admin == 0): ?>
+                            <li class="dropdown"><a href="#"><span><?php echo e(auth()->user()->name); ?></span> <i
+                                        class="bi bi-chevron-down"></i></a>
+                                <ul>
+                                    <li><a href="<?php echo e(route('admin.dashboard')); ?>">Dashboard</a></li>
+                                </ul>
+                            </li>
+                        <?php else: ?>
+                            <li class="dropdown"><a href="#"><span><?php echo e(auth()->user()->name); ?></span> <i
+                                        class="bi bi-chevron-down"></i></a>
+                                <ul>
+                                    <li><a href="<?php echo e(route('pasien.dashboard')); ?>">Dashboard</a></li>
+                                </ul>
+                            </li>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <li class="dropdown"><a href="#"><span>Pendaftaran</span> <i
+                                    class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li><a href="<?php echo e(route('registrasi')); ?>">Registrasi</a></li>
+                                <li><a href="<?php echo e(route('login')); ?>">Login</a></li>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
                 <?php endif; ?>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>

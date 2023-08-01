@@ -8,14 +8,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description"
-        content="Berry is made using Bootstrap 5 design framework. Download the free admin template & use it for your project." />
-    <meta name="keywords"
-        content="Berry, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Bootstrap Admin Template" />
-    <meta name="author" content="CodedThemes" />
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-    <!-- [Favicon] icon -->
-    <link rel="icon" href="{{ asset('admin') }}/images/favicon.svg" type="image/x-icon" />
+    <!-- Favicons -->
+    <link href="{{ asset('homepage') }}/img/LOGO.png" rel="icon">
+    <link href="{{ asset('homepage') }}/img/LOGO.png" rel="apple-touch-icon">
     <!-- [Google Font] Family -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
         id="main-font-link" />
@@ -56,25 +54,40 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput"
-                                placeholder="Email address / Username" />
-                            <label for="floatingInput">Email address / Username</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="Password" />
-                            <label for="floatingInput">Password</label>
-                        </div>
-                        <div class="d-flex mt-1 justify-content-between">
-                            <div class="form-check">
-                                <input class="form-check-input input-primary" type="checkbox" id="customCheckc1"
-                                    checked="" />
-                                <label class="form-check-label text-muted" for="customCheckc1">Remember me</label>
+                        @if (session()->has('loginError'))
+                            <div class="mb-3">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <span class="alert-text">{{ session('loginError') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="d-grid mt-4">
-                            <button type="button" class="btn btn-primary">Sign In</button>
-                        </div>
+                        @endif
+                        <form action="{{ route('prosesLogin') }}" method="POST">
+                            @csrf
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="username" placeholder="Email / Username"
+                                    name="username" required autofocus />
+                                <label for="username">Email / Username</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Password" required />
+                                <label for="password">Password</label>
+                            </div>
+                            <div class="d-flex mt-1 justify-content-between">
+                                <div class="form-check">
+                                    <input class="form-check-input input-primary" type="checkbox" id="customCheckc1"
+                                        checked="" />
+                                    <label class="form-check-label text-muted" for="customCheckc1">Ingat Saya</label>
+                                </div>
+                            </div>
+                            <div class="d-grid mt-4">
+                                <button type="submit" class="btn btn-primary">Masuk</button>
+                            </div>
+                        </form>
                         <hr />
                         <h5 class="d-flex justify-content-center">Belum punya akun?<a href="{{ route('registrasi') }}"
                                 class="ms-1">Daftar disini...</a></h5>

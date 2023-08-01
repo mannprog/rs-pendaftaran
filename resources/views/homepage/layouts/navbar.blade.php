@@ -26,16 +26,37 @@
                         <li><a href="{{ route('pelayanan.poli.radiologi') }}">Poli Radiologi</a></li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#"><span>Pendaftaran</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="{{ route('registrasi') }}">Registrasi</a></li>
-                        <li><a href="{{ route('login') }}">Login</a></li>
-                    </ul>
-                </li>
                 @if (Route::currentRouteName() === 'homepage')
-                    <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                    <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
                 @else
-                    <li><a class="nav-link scrollto" href="{{ route('homepage') }}#contact">Contact</a></li>
+                    <li><a class="nav-link scrollto" href="{{ route('homepage') }}#contact">Kontak</a></li>
+                @endif
+                @if (Route::has('login'))
+                    @auth
+                        @if (Auth::user()->is_admin == 0)
+                            <li class="dropdown"><a href="#"><span>{{ auth()->user()->name }}</span> <i
+                                        class="bi bi-chevron-down"></i></a>
+                                <ul>
+                                    <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                                </ul>
+                            </li>
+                        @else
+                            <li class="dropdown"><a href="#"><span>{{ auth()->user()->name }}</span> <i
+                                        class="bi bi-chevron-down"></i></a>
+                                <ul>
+                                    <li><a href="{{ route('pasien.dashboard') }}">Dashboard</a></li>
+                                </ul>
+                            </li>
+                        @endif
+                    @else
+                        <li class="dropdown"><a href="#"><span>Pendaftaran</span> <i
+                                    class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li><a href="{{ route('registrasi') }}">Registrasi</a></li>
+                                <li><a href="{{ route('login') }}">Login</a></li>
+                            </ul>
+                        </li>
+                    @endauth
                 @endif
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>

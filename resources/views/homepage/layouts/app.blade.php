@@ -11,7 +11,7 @@
 
     <!-- Favicons -->
     <link href="{{ asset('homepage') }}/img/LOGO.png" rel="icon">
-    <link href="{{ asset('homepage') }}/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{{ asset('homepage') }}/img/LOGO.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link
