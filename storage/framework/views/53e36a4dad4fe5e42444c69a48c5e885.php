@@ -29,12 +29,12 @@
                     </ul>
                 </li>
                 <li class="pc-item">
-                    <a href="../elements/bc_typography.html" class="pc-link"><span class="pc-micon"><i
-                                class="ti ti-user"></i></span><span class="pc-mtext">Dokter</span></a>
+                    <a href="<?php echo e(route('layanan.index')); ?>" class="pc-link"><span class="pc-micon"><i
+                                class="ti ti-accessible"></i></span><span class="pc-mtext">Layanan</span></a>
                 </li>
                 <li class="pc-item">
-                    <a href="../elements/bc_typography.html" class="pc-link"><span class="pc-micon"><i
-                                class="ti ti-accessible"></i></span><span class="pc-mtext">Layanan</span></a>
+                    <a href="<?php echo e(route('dokter.index')); ?>" class="pc-link"><span class="pc-micon"><i
+                                class="ti ti-user"></i></span><span class="pc-mtext">Dokter</span></a>
                 </li>
                 <li class="pc-item">
                     <a href="../elements/bc_typography.html" class="pc-link"><span class="pc-micon"><i

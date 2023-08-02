@@ -7,11 +7,11 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h3 class="me-3">Kelola Petugas</h3>
+                        <h3 class="me-3">Kelola Layanan</h3>
                     </div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?php echo e(route('admin.dashboard')); ?>">Dashboard</a></li>
-                        <li class="breadcrumb-item" aria-current="page">Kelola Petugas</li>
+                        <li class="breadcrumb-item" aria-current="page">Kelola Layanan</li>
                     </ul>
                 </div>
             </div>
@@ -38,7 +38,7 @@
     </div>
     <!-- [ Main Content ] end -->
 
-    <?php echo $__env->make('admin.pages.users.petugas.component.addOrEdit', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('admin.pages.layanan.component.addOrEdit', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('custom-styles'); ?>
@@ -71,12 +71,12 @@
 
             $('#createData').click(function() {
                 setTimeout(function() {
-                    $('#name').focus();
+                    $('#nama').focus();
                 }, 500);
                 $('#saveBtn').removeAttr('disabled');
                 $('#saveBtn').html("Simpan");
                 $('#itemForm').trigger("reset");
-                $('.modal-title').html("Tambah User");
+                $('.modal-title').html("Tambah Layanan");
                 $('#modal-md').modal('show');
             });
 
@@ -87,14 +87,14 @@
                 var formData = new FormData($('#itemForm')[0]);
                 $.ajax({
                     data: formData,
-                    url: "<?php echo e(route('users.petugas.store')); ?>",
+                    url: "<?php echo e(route('layanan.store')); ?>",
                     contentType: false,
                     processData: false,
                     type: "POST",
                     success: function(data) {
                         $('#itemForm').trigger("reset");
                         $('#modal-md').modal('hide');
-                        $('#petugas-table').DataTable().draw();
+                        $('#layanan-table').DataTable().draw();
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',
@@ -118,19 +118,16 @@
 
             $('body').on('click', '#editData', function() {
                 var data_id = $(this).data('id');
-                $.get("<?php echo e(route('users.petugas.index')); ?>" + '/' + data_id + '/edit', function(data) {
+                $.get("<?php echo e(route('layanan.index')); ?>" + '/' + data_id + '/edit', function(data) {
                     $('#modal-ed').modal('show');
                     setTimeout(function() {
-                        $('#name').focus();
+                        $('#nama').focus();
                     }, 500);
                     $('.modal-title').html("Edit User");
                     $('#editBtn').removeAttr('disabled');
                     $('#editBtn').html("Simpan");
                     $('#edit_data_id').val(data.id);
-                    $('#edit_name').val(data.name);
-                    $('#edit_username').val(data.username);
-                    $('#edit_email').val(data.email);
-                    $('#edit_jabatan').val(data.jabatan);
+                    $('#edit_nama').val(data.nama);
                 })
             });
 
@@ -142,14 +139,14 @@
                 $('#editBtn').html('Simpan ...');
                 $.ajax({
                     data: formData,
-                    url: "<?php echo e(route('users.petugas.index')); ?>" + '/' + data_id,
+                    url: "<?php echo e(route('layanan.index')); ?>" + '/' + data_id,
                     contentType: false,
                     processData: false,
                     type: "POST",
                     success: function(data) {
                         $('#editForm').trigger("reset");
                         $('#modal-ed').modal('hide');
-                        $('#petugas-table').DataTable().draw();
+                        $('#layanan-table').DataTable().draw();
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',
@@ -181,13 +178,13 @@
                     $('.deleteBtn').html('...');
                     $.ajax({
                         data: formData,
-                        url: "<?php echo e(route('users.petugas.index')); ?>" + '/' + data_id,
+                        url: "<?php echo e(route('layanan.index')); ?>" + '/' + data_id,
                         contentType: false,
                         processData: false,
                         type: "POST",
                         success: function(data) {
                             $('#deleteDoc').trigger("reset");
-                            $('#petugas-table').DataTable().draw();
+                            $('#layanan-table').DataTable().draw();
                             toastr.success(data.message);
                         },
                         error: function(data) {
@@ -203,4 +200,4 @@
     </script>
 <?php $__env->stopPush(); ?>
 
-<?php echo $__env->make('admin.layouts.app', ['title' => 'Kelola Petugas'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\rs-pendaftaran\resources\views/admin/pages/users/petugas/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('admin.layouts.app', ['title' => 'Kelola Layanan'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\rs-pendaftaran\resources\views/admin/pages/layanan/index.blade.php ENDPATH**/ ?>

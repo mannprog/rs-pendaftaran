@@ -78,7 +78,9 @@ class PasienController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = User::with('detailpasien')->find($id);
+
+        return view('admin.pages.users.pasien.detail', compact('data'));
     }
 
     /**

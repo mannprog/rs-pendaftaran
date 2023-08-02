@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DokterController;
+use App\Http\Controllers\LayananController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PetugasController;
 
@@ -70,6 +72,8 @@ Route::middleware('auth')->group(function () {
                 Route::resource('pasien', PasienController::class);
             });
         });
+        Route::resource('layanan', LayananController::class);
+        Route::resource('dokter', DokterController::class);
     });
 
     Route::get('pasien', [DashboardController::class, 'indexPasien'])->name('pasien.dashboard');
