@@ -28,7 +28,7 @@
                     <button id="createData" class="btn btn-sm btn-primary shadow mb-4"><i class="ti ti-plus"></i>
                         Tambah</button>
                     <div class="table-responsive">
-                        {{ $dataTable->table(['class' => 'table align-items-center display responsive nowrap']) }}
+                        {{ $dataTable->table(['class' => 'table align-items-center display responsive nowrap', 'width' => '100%']) }}
                     </div>
                 </div>
             </div>

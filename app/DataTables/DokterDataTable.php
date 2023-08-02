@@ -22,8 +22,11 @@ class DokterDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'dokter.action')
-            ->setRowId('id');
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
+            return view('admin.pages.dokter.component.action', compact('row'))->render();
+        })
+        ->rawColumns(['action']);
     }
 
     /**
@@ -31,7 +34,8 @@ class DokterDataTable extends DataTable
      */
     public function query(Dokter $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()
+        ->with('layanan');
     }
 
     /**
@@ -44,7 +48,11 @@ class DokterDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->addColumnDef([
+                        'responsivePriority' => 1,
+                        'targets' => 1,
+                    ])
+                    ->orderBy(1, 'asc')
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -62,15 +70,32 @@ class DokterDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('DT_RowIndex')
+                ->title('No')
+                ->searchable(false)
+                ->orderable(false)
+                ->addClass("text-sm font-weight-normal")
+                ->addClass('text-center'),
+            Column::make('nama')
+                ->addClass("text-sm font-weight-normal text-wrap")
+                ->title('Nama Dokter'),
+            Column::make('layanan.nama')
+                ->addClass("text-sm font-weight-normal text-wrap")
+                ->title('Spesialis'),
+            Column::make('hari')
+                ->addClass("text-sm font-weight-normal text-wrap")
+                ->title('Hari'),
+            Column::make('jam')
+                ->addClass("text-sm font-weight-normal text-wrap")
+                ->title('Jam'),
+            Column::make('tarif')
+                ->addClass("text-sm font-weight-normal text-wrap")
+                ->title('Tarif'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+                ->exportable(false)
+                ->printable(false)
+                ->addClass("text-sm font-weight-normal")
+                ->addClass('text-center'),
         ];
     }
 

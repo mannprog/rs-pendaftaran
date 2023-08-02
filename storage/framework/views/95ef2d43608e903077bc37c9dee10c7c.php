@@ -7,11 +7,11 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h3 class="me-3">Kelola Layanan</h3>
+                        <h3 class="me-3">Kelola Dokter</h3>
                     </div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?php echo e(route('admin.dashboard')); ?>">Dashboard</a></li>
-                        <li class="breadcrumb-item" aria-current="page">Kelola Layanan</li>
+                        <li class="breadcrumb-item" aria-current="page">Kelola Dokter</li>
                     </ul>
                 </div>
             </div>
@@ -38,7 +38,7 @@
     </div>
     <!-- [ Main Content ] end -->
 
-    <?php echo $__env->make('admin.pages.layanan.component.addOrEdit', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('admin.pages.dokter.component.addOrEdit', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('custom-styles'); ?>
@@ -76,7 +76,7 @@
                 $('#saveBtn').removeAttr('disabled');
                 $('#saveBtn').html("Simpan");
                 $('#itemForm').trigger("reset");
-                $('.modal-title').html("Tambah Layanan");
+                $('.modal-title').html("Tambah Dokter");
                 $('#modal-md').modal('show');
             });
 
@@ -87,14 +87,14 @@
                 var formData = new FormData($('#itemForm')[0]);
                 $.ajax({
                     data: formData,
-                    url: "<?php echo e(route('layanan.store')); ?>",
+                    url: "<?php echo e(route('dokter.store')); ?>",
                     contentType: false,
                     processData: false,
                     type: "POST",
                     success: function(data) {
                         $('#itemForm').trigger("reset");
                         $('#modal-md').modal('hide');
-                        $('#layanan-table').DataTable().draw();
+                        $('#dokter-table').DataTable().draw();
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',
@@ -118,16 +118,20 @@
 
             $('body').on('click', '#editData', function() {
                 var data_id = $(this).data('id');
-                $.get("<?php echo e(route('layanan.index')); ?>" + '/' + data_id + '/edit', function(data) {
+                $.get("<?php echo e(route('dokter.index')); ?>" + '/' + data_id + '/edit', function(data) {
                     $('#modal-ed').modal('show');
                     setTimeout(function() {
                         $('#nama').focus();
                     }, 500);
-                    $('.modal-title').html("Edit Layanan");
+                    $('.modal-title').html("Edit Dokter");
                     $('#editBtn').removeAttr('disabled');
                     $('#editBtn').html("Simpan");
                     $('#edit_data_id').val(data.id);
                     $('#edit_nama').val(data.nama);
+                    $('#edit_layanan_id').val(data.layanan_id);
+                    $('#edit_hari').val(data.hari);
+                    $('#edit_jam').val(data.jam);
+                    $('#edit_tarif').val(data.tarif);
                 })
             });
 
@@ -139,14 +143,14 @@
                 $('#editBtn').html('Simpan ...');
                 $.ajax({
                     data: formData,
-                    url: "<?php echo e(route('layanan.index')); ?>" + '/' + data_id,
+                    url: "<?php echo e(route('dokter.index')); ?>" + '/' + data_id,
                     contentType: false,
                     processData: false,
                     type: "POST",
                     success: function(data) {
                         $('#editForm').trigger("reset");
                         $('#modal-ed').modal('hide');
-                        $('#layanan-table').DataTable().draw();
+                        $('#dokter-table').DataTable().draw();
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',
@@ -178,13 +182,13 @@
                     $('.deleteBtn').html('...');
                     $.ajax({
                         data: formData,
-                        url: "<?php echo e(route('layanan.index')); ?>" + '/' + data_id,
+                        url: "<?php echo e(route('dokter.index')); ?>" + '/' + data_id,
                         contentType: false,
                         processData: false,
                         type: "POST",
                         success: function(data) {
                             $('#deleteDoc').trigger("reset");
-                            $('#layanan-table').DataTable().draw();
+                            $('#dokter-table').DataTable().draw();
                             toastr.success(data.message);
                         },
                         error: function(data) {
@@ -200,4 +204,4 @@
     </script>
 <?php $__env->stopPush(); ?>
 
-<?php echo $__env->make('admin.layouts.app', ['title' => 'Kelola Layanan'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\rs-pendaftaran\resources\views/admin/pages/layanan/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('admin.layouts.app', ['title' => 'Kelola Dokter'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\rs-pendaftaran\resources\views/admin/pages/dokter/index.blade.php ENDPATH**/ ?>
