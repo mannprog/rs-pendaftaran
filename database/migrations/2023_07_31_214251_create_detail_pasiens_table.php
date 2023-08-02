@@ -19,7 +19,8 @@ return new class extends Migration
             $table->date('tanggal_lahir')->nullable();
             $table->text('alamat')->nullable();
             $table->string('no_hp')->nullable();
-            $table->enum('status', ['bpjs', 'asuransi', 'reguler'])->default('reguler');
+            $table->unsignedBigInteger('status_id');
+            $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');
             $table->timestamps();
         });
     }

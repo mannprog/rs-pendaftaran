@@ -46,6 +46,7 @@ class UserFactory extends Factory
                     'tanggal_lahir' => fake('id_ID')->date(),
                     'alamat' => fake('id_ID')->address(),
                     'no_hp' => fake('id_ID')->phoneNumber(),
+                    'status_id' => 1,
                 ]);
             } 
         });
