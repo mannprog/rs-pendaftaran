@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Status;
 use App\Models\DetailPasien;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
@@ -16,13 +17,15 @@ class PasienController extends Controller
      */
     public function index(PasienDataTable $dataTable)
     {
-        return $dataTable->render('admin.pages.users.pasien.index');
+        $status = Status::all();
+        
+        return $dataTable->render('admin.pages.users.pasien.index', compact('status'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store()
     {
         $dataId = request('data_id');
 
@@ -33,7 +36,8 @@ class PasienController extends Controller
                     'username' => 'required|unique:users,username',
                     'email' => 'required|email|unique:users,email',
                     'password' => 'required|min:4',
-                    'foto' => 'sometimes|mimes:png,jpg,jpeg,svg|max:1048'
+                    'foto' => 'sometimes|mimes:png,jpg,jpeg,svg|max:1048',
+                    'status_id' => 'required',
                 ]);
 
                 $datas = [
@@ -58,8 +62,12 @@ class PasienController extends Controller
 
                 $user = User::updateOrCreate(['id' => $dataId], $datas);
 
+                $no_rkm = mt_rand(10000000, 99999999);
+
                 DetailPasien::create([
                     'user_id' => $user->id,
+                    'no_rkm' => $no_rkm,
+                    'status_id' => request('status_id'),
                 ]);
             });
         } catch (InvalidArgumentException $e) {
@@ -111,7 +119,7 @@ class PasienController extends Controller
                     'tanggal_lahir' => 'required|string',
                     'alamat' => 'required|string',
                     'no_hp' => 'required|string',
-                    'status' => 'required|string',
+                    'status_id' => 'required|string',
                 ]);
 
                 $user = User::findOrFail($data_id);
@@ -131,7 +139,7 @@ class PasienController extends Controller
                 $detail->tanggal_lahir = request('tanggal_lahir');
                 $detail->alamat = request('alamat');
                 $detail->no_hp = request('no_hp');
-                $detail->status = request('status');
+                $detail->status_id = request('status_id');
                 $detail->save();
             });
         } catch (InvalidArgumentException $e) {
