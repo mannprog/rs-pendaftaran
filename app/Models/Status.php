@@ -15,4 +15,9 @@ class Status extends Model
     {
         return $this->hasMany(DetailPasien::class);
     }
+
+    public function tindakan()
+    {
+        return $this->hasOne(Tindakan::class);
+    }
 }

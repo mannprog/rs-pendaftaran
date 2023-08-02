@@ -11,5 +11,8 @@ class Tindakan extends Model
 
     protected $guarded = ['id'];
 
-    
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
 }
