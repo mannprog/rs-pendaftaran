@@ -132,7 +132,7 @@
                     $('#edit_tanggal_lahir').val(data.detailpasien.tanggal_lahir);
                     $('#edit_alamat').val(data.detailpasien.alamat);
                     $('#edit_no_hp').val(data.detailpasien.no_hp);
-                    $('#edit_status').val(data.detailpasien.status);
+                    $('#edit_status').val(data.detailpasien.status_id);
                 })
             });
 

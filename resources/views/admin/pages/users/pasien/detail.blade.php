@@ -34,6 +34,17 @@
                             <h1 class="border-bottom pb-2">{{ $data->name }}</h1>
                             <div class="row align-items-center">
                                 <div class="col-5 col-lg-2">
+                                    No RKM
+                                </div>
+                                <div class="col-1 col-lg-1 text-center">
+                                    :
+                                </div>
+                                <div class="col-6 col-lg-9">
+                                    RKM-{{ $data->detailpasien->no_rkm }}
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-5 col-lg-2">
                                     Tempat, Tanggal Lahir
                                 </div>
                                 <div class="col-1 col-lg-1 text-center">
@@ -76,13 +87,7 @@
                                     :
                                 </div>
                                 <div class="col-6 col-lg-9">
-                                    @if ($data->detailpasien->status === 'reguler')
-                                        Reguler
-                                    @elseif ($data->detailpasien->status === 'asuransi')
-                                        Asuransi
-                                    @else
-                                        BPJS
-                                    @endif
+                                    {{ $data->detailpasien->status->nama }}
                                 </div>
                             </div>
                         </div>
