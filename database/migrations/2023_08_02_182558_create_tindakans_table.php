@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('tarif');
-            $table->string('status')->nullable();
+            $table->unsignedBigInteger('statuses_id');
+            $table->foreign('statuses_id')->references('id')->on('statuses')->onDelete('restrict');
             $table->timestamps();
         });
     }
