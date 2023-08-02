@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('content'); ?>
     <!-- [ breadcrumb ] start -->
     <div class="page-header">
@@ -25,7 +23,7 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    <button id="createData" class="btn btn-sm btn-primary shadow mb-4"><i class="ti ti-plus"></i>
+                    <button id="createData" class="btn btn-sm btn-secondary shadow mb-4"><i class="ti ti-plus"></i>
                         Tambah</button>
                     <div class="table-responsive">
                         <?php echo e($dataTable->table(['class' => 'table align-items-center display responsive nowrap'])); ?>

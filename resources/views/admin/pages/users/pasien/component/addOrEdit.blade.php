@@ -90,22 +90,43 @@
                                 name="email" required>
                         </div>
                         <div class="col-lg-6">
-                            <label for="edit_jabatan" class="form-label">Jabatan<span
-                                    class="text-danger">*</span></label>
-                            <select class="form-select form-select-sm" aria-label="Default select example"
-                                name="jabatan" id="edit_jabatan" required>
-                                <option selected disabled>---Pilih Jabatan---</option>
-                                <option value="admin">Admin</option>
-                                <option value="pendaftaran">Petugas Pendaftaran</option>
-                                <option value="kasir">Kasir</option>
-                            </select>
+                            <label for="tempat_lahir" class="form-label">Tempat Lahir<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-sm" id="edit_tempat_lahir"
+                                name="tempat_lahir" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <label for="tanggal_lahir" class="form-label">Tanggal Lahir<span class="text-danger">*</span></label>
+                            <input type="date" class="form-control form-control-sm" id="edit_tanggal_lahir"
+                                name="tanggal_lahir" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="status" class="form-label">Status<span class="text-danger">*</span></label>
+                            <select class="form-select form-select-sm" aria-label="Default select example" name="status" id="edit_status">
+                                <option selected>--- Pilih Status ---</option>
+                                <option value="reguler">Reguler</option>
+                                <option value="asuransi">Asuransi</option>
+                                <option value="bpjs">BPJS</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="no_hp" class="form-label">No Handphone<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-sm" id="edit_no_hp"
+                                name="no_hp" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="edit_foto" class="form-label">Foto</label>
+                            <input class="form-control form-control-sm" type="file" id="edit_foto" name="foto">
+                            <img id="edit_img-preview" class="col-lg-6 img-fluid mt-2">
                         </div>
                     </div>
                     <div class="row mb-6">
                         <div class="col-lg-6">
-                            <label for="edit_foto" class="form-label">Foto</label>
-                            <input class="form-control" type="file" id="edit_foto" name="foto">
-                            <img id="edit_img-preview" class="col-lg-6 img-fluid mt-2">
+                            <label for="alamat" class="form-label">Alamat<span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="edit_alamat" name="alamat" required rows="3"></textarea>
                         </div>
                     </div>
                 </div>

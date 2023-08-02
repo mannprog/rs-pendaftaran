@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('content'); ?>
     <!-- [ breadcrumb ] start -->
     <div class="page-header">
@@ -130,7 +128,11 @@
                     $('#edit_name').val(data.name);
                     $('#edit_username').val(data.username);
                     $('#edit_email').val(data.email);
-                    $('#edit_jabatan').val(data.jabatan);
+                    $('#edit_tempat_lahir').val(data.detailpasien.tempat_lahir);
+                    $('#edit_tanggal_lahir').val(data.detailpasien.tanggal_lahir);
+                    $('#edit_alamat').val(data.detailpasien.alamat);
+                    $('#edit_no_hp').val(data.detailpasien.no_hp);
+                    $('#edit_status').val(data.detailpasien.status);
                 })
             });
 

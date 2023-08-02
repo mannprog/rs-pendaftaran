@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\DetailPasien;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
 use Illuminate\Support\Facades\DB;
 use App\DataTables\PasienDataTable;
-use App\Models\DetailPasien;
 
 class PasienController extends Controller
 {
@@ -86,15 +86,61 @@ class PasienController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = User::with('detailpasien')->findOrFail($id);
+
+        return response()->json($data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update()
     {
-        //
+        $data_id = request('data_id');
+
+        try {
+            DB::transaction(function () use ($data_id) {
+                request()->validate([
+                    'name' => 'required|string',
+                    'username' => 'required|string',
+                    'email' => 'required|email',
+                    'foto' => 'sometimes|mimes:mng,jpg,jpeg,svg|max:1048',
+                    'tempat_lahir' => 'required|string',
+                    'tanggal_lahir' => 'required|string',
+                    'alamat' => 'required|string',
+                    'no_hp' => 'required|string',
+                    'status' => 'required|string',
+                ]);
+
+                $user = User::findOrFail($data_id);
+                $user->name = request('name');
+                $user->email = request('email');
+                $user->username = request('username');
+                if (request()->hasFile('foto')) {
+                    $foto = request()->file('foto');
+                    $filename = $foto->getClientOriginalName();
+                    $foto->move(public_path('admin/images/user'), $filename);
+                    $user->foto = $filename;
+                }
+                $user->save();
+
+                $detail = DetailPasien::where('user_id', $user->id)->first();
+                $detail->tempat_lahir = request('tempat_lahir');
+                $detail->tanggal_lahir = request('tanggal_lahir');
+                $detail->alamat = request('alamat');
+                $detail->no_hp = request('no_hp');
+                $detail->status = request('status');
+                $detail->save();
+            });
+        } catch (InvalidArgumentException $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 400);
+        }
+
+        return response()->json([
+            'message' => 'Data petugas berhasil diubah',
+        ]);
     }
 
     /**
@@ -102,6 +148,16 @@ class PasienController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $data = User::findOrFail($id);
+            $data->delete();
+        } catch (InvalidArgumentException $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 400);
+        }
+        return response()->json([
+            'message' => 'Petugas berhasil dihapus',
+        ]);
     }
 }
