@@ -7,6 +7,7 @@ use App\Http\Controllers\DokterController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\TindakanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +75,7 @@ Route::middleware('auth')->group(function () {
         });
         Route::resource('layanan', LayananController::class);
         Route::resource('dokter', DokterController::class);
+        Route::resource('tindakan', TindakanController::class);
     });
 
     Route::get('pasien', [DashboardController::class, 'indexPasien'])->name('pasien.dashboard');

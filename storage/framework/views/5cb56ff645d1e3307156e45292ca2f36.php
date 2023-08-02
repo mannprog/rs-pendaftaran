@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('content'); ?>
     <div class="row">
         <!-- [ sample-page ] start -->
