@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\DataTables\TindakanDataTable;
 use App\Http\Requests\StoreTindakanRequest;
 use App\Http\Requests\UpdateTindakanRequest;
+use App\Models\Status;
 
 class TindakanController extends Controller
 {
@@ -16,7 +17,8 @@ class TindakanController extends Controller
      */
     public function index(TindakanDataTable $dataTable)
     {
-        return $dataTable->render('admin.pages.tindakan.index');
+        $status = Status::all();
+        return $dataTable->render('admin.pages.tindakan.index', compact('status'));
     }
 
     /**

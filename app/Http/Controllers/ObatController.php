@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\ObatDataTable;
 use App\Models\Obat;
+use App\Models\Status;
+use InvalidArgumentException;
+use App\DataTables\ObatDataTable;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreObatRequest;
 use App\Http\Requests\UpdateObatRequest;
 
@@ -14,7 +17,8 @@ class ObatController extends Controller
      */
     public function index(ObatDataTable $dataTable)
     {
-        return $dataTable->render('admin.pages.obat.index');
+        $status = Status::all();
+        return $dataTable->render('admin.pages.obat.index', compact('status'));
     }
 
     /**
@@ -28,7 +32,7 @@ class ObatController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreObatRequest $request)
+    public function store()
     {
         $dataId = request('data_id');
 
@@ -36,13 +40,21 @@ class ObatController extends Controller
             DB::transaction(function () use ($dataId) {
                 request()->validate([
                     'nama' => 'required|max:255|unique:Obats,nama',
-                    'tarif' => 'required|max:255|',
+                    'stok' => 'required|max:255|',
+                    'stok_min' => 'required|max:255|',
+                    'harga_jual' => 'required|max:255|',
+                    'harga_beli' => 'required|max:255|',
+                    'exp' => 'required|max:255|',
                     'statuses_id' => 'required|max:255|',
                 ]);
 
                 $datas = [
                     'nama' => request('nama'),
-                    'tarif' => request('tarif'),
+                    'stok' => request('stok'),
+                    'stok_min' => request('stok_min'),
+                    'harga_jual' => request('harga_jual'),
+                    'harga_beli' => request('harga_beli'),
+                    'exp' => request('exp'),
                     'statuses_id' => request('statuses_id'),
                 ];
 
@@ -88,13 +100,21 @@ class ObatController extends Controller
             DB::transaction(function () use ($data_id) {
                 request()->validate([
                     'nama' => 'required|string',
-                    'tarif' => 'required|string',
+                    'stok' => 'required|string',
+                    'stok_min' => 'required|string',
+                    'harga_jual' => 'required|string',
+                    'harga_beli' => 'required|string',
+                    'exp' => 'required|string',
                     'statuses_id' => 'required',
                 ]);
 
                 $data = Obat::findOrFail($data_id);
                 $data->nama = request('nama');
-                $data->tarif = request('tarif');
+                $data->stok = request('stok');
+                $data->stok_min = request('stok_min');
+                $data->harga_jual = request('harga_jual');
+                $data->harga_beli = request('harga_beli');
+                $data->exp = request('exp');
                 $data->statuses_id = request('statuses_id');
                 $data->save();
             });

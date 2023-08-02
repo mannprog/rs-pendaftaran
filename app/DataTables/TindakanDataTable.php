@@ -2,15 +2,16 @@
 
 namespace App\DataTables;
 
+use App\Models\Status;
 use App\Models\Tindakan;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class TindakanDataTable extends DataTable
 {
@@ -23,6 +24,12 @@ class TindakanDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
+            ->addColumn('status', function ($row) {
+                $status = Status::where('id', $row->statuses_id)->first();
+    
+                return $status->nama;
+            })
+            ->rawColumns(['nama'])
             ->addColumn('action', function ($row) {
                 return view('admin.pages.tindakan.component.action', compact('row'))->render();
             })
@@ -85,7 +92,7 @@ class TindakanDataTable extends DataTable
             Column::make('tarif')
                 ->addClass("text-sm font-weight-normal text-wrap")
                 ->title('Tarif'),
-            Column::make('status.nama')
+            Column::make('status')
                 ->addClass("text-sm font-weight-normal text-wrap")
                 ->title('Status'),
             Column::computed('action')

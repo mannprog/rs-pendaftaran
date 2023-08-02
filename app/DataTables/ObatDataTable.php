@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Obat;
+use App\Models\Status;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -23,6 +24,12 @@ class ObatDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
         ->addIndexColumn()
+        ->addColumn('status', function ($row) {
+            $status = Status::where('id', $row->statuses_id)->first();
+
+            return $status->nama;
+        })
+        ->rawColumns(['nama'])
         ->addColumn('action', function ($row) {
             return view('admin.pages.obat.component.action', compact('row'))->render();
         })
@@ -47,7 +54,7 @@ class ObatDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(8)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -89,6 +96,13 @@ class ObatDataTable extends DataTable
         Column::make('exp')
             ->addClass("text-sm font-weight-normal text-wrap")
             ->title('Tanggal Expired'),
+        Column::make('status')
+            ->addClass("text-sm font-weight-normal text-wrap")
+            ->title('Status'),
+        Column::make('created_at')
+            ->addClass("text-sm font-weight-normal text-wrap")
+            ->hidden()
+            ->title('Dibuat'),
         Column::computed('action')
             ->exportable(false)
             ->printable(false)

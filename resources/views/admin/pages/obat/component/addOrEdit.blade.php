@@ -12,23 +12,57 @@
                 <div class="modal-body">
                     <div class="row mb-3">
                         <div class="col-lg-12">
-                            <label for="nama" class="form-label">Nama Tindakan<span class="text-danger">*</span></label>
+                            <label for="nama" class="form-label">Nama Obat<span class="text-danger">*</span></label>
                             <input type="text" class="form-control form-control-sm" id="nama" name="nama"
                                 required autofocus>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-12">
-                            <label for="tarif" class="form-label">Tarif Tindakan<span class="text-danger">*</span></label>
-                            <input type="number" class="form-control form-control-sm" id="tarif" name="tarif"
+                            <label for="stok" class="form-label">Stok<span class="text-danger">*</span></label>
+                            <input type="number" class="form-control form-control-sm" id="stok" name="stok"
                                 required autofocus>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-12">
-                            <label for="status" class="form-label">Status<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-sm" id="status" name="status"
+                            <label for="stok_min" class="form-label">Stok Minimal<span class="text-danger">*</span></label>
+                            <input type="number" class="form-control form-control-sm" id="stok_min" name="stok_min"
                                 required autofocus>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-12">
+                            <label for="harga_jual" class="form-label">Harga Jual<span class="text-danger">*</span></label>
+                            <input type="number" class="form-control form-control-sm" id="harga_jual" name="harga_jual"
+                                required autofocus>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-12">
+                            <label for="harga_beli" class="form-label">Harga Beli<span class="text-danger">*</span></label>
+                            <input type="number" class="form-control form-control-sm" id="harga_beli" name="harga_beli"
+                                required autofocus>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-12">
+                            <label for="exp" class="form-label">Expired<span class="text-danger">*</span></label>
+                            <input type="date" class="form-control form-control-sm" id="exp" name="exp"
+                                required autofocus>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-12">
+                            <label for="statuses_id" class="form-label">Status<span class="text-danger">*</span></label>
+                            {{-- <input type="text" class="form-control form-control-sm" id="statuses_id" name="statuses_id" --}}
+                                {{-- required autofocus> --}}
+                                <select class="form-select form-select-sm" name="statuses_id" id="statuses_id">
+                                    <option selected disabled>--- Pilih Status ---</option>
+                                    @foreach ($status as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
                         </div>
                     </div>
                 </div>
@@ -60,7 +94,7 @@
                 <div class="modal-body">
                     <div class="row mb-3">
                         <div class="col-lg-12">
-                            <label for="edit_nama" class="form-label">Nama Tindakan<span
+                            <label for="edit_nama" class="form-label">Nama Obat<span
                                     class="text-danger">*</span></label>
                             <input type="text" class="form-control form-control-sm" id="edit_nama" name="nama"
                                 required autofocus>
@@ -68,18 +102,54 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-12">
-                            <label for="edit_tarif" class="form-label">Tarif<span
+                            <label for="edit_stok" class="form-label">Stok<span
                                     class="text-danger">*</span></label>
-                            <input type="number" class="form-control form-control-sm" id="edit_tarif" name="tarif"
+                            <input type="number" class="form-control form-control-sm" id="edit_stok" name="stok"
                                 required >
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-12">
-                            <label for="edit_status" class="form-label">Status<span
+                            <label for="edit_stok_min" class="form-label">Stok Minimal<span
                                     class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-sm" id="edit_status" name="statuses_id"
+                            <input type="number" class="form-control form-control-sm" id="edit_stok_min" name="stok_min"
                                 required >
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-12">
+                            <label for="edit_harga_jual" class="form-label">Harga Jual<span
+                                    class="text-danger">*</span></label>
+                            <input type="number" class="form-control form-control-sm" id="edit_harga_jual" name="harga_jual"
+                                required >
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-12">
+                            <label for="edit_harga_beli" class="form-label">Harga Beli<span
+                                    class="text-danger">*</span></label>
+                            <input type="number" class="form-control form-control-sm" id="edit_harga_beli" name="harga_beli"
+                                required >
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-12">
+                            <label for="edit_exp" class="form-label">Expired<span
+                                    class="text-danger">*</span></label>
+                            <input type="date" class="form-control form-control-sm" id="edit_exp" name="exp"
+                                required >
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-12">
+                            <label for="edit_statuses_id" class="form-label">Status<span
+                                    class="text-danger">*</span></label>
+                                    <select class="form-select form-select-sm" name="statuses_id" id="edit_statuses_id">
+                                        <option selected disabled>--- Pilih Status ---</option>
+                                        @foreach ($status as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
                         </div>
                     </div>
                 </div>

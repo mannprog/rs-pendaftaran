@@ -126,8 +126,12 @@
                     $('#editBtn').html("Simpan");
                     $('#edit_data_id').val(data.id);
                     $('#edit_nama').val(data.nama);
-                    $('#edit_tarif').val(data.tarif);
-                    $('#edit_status').val(data.statuses_id);
+                    $('#edit_stok').val(data.stok);
+                    $('#edit_stok_min').val(data.stok_min);
+                    $('#edit_harga_jual').val(data.harga_jual);
+                    $('#edit_harga_beli').val(data.harga_beli);
+                    $('#edit_exp').val(data.exp);
+                    $('#edit_statuses_id').val(data.statuses_id);
                 })
             });
 

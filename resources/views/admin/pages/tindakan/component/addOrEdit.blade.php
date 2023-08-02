@@ -27,8 +27,12 @@
                     <div class="row mb-3">
                         <div class="col-lg-12">
                             <label for="status" class="form-label">Status<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-sm" id="status" name="status"
-                                required autofocus>
+                            <select class="form-select form-select-sm" name="statuses_id" id="statuses_id">
+                                <option selected disabled>--- Pilih Status ---</option>
+                                @foreach ($status as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -76,10 +80,14 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-12">
-                            <label for="edit_status" class="form-label">Status<span
+                            <label for="edit_statuses_id" class="form-label">Status<span
                                     class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-sm" id="edit_status" name="statuses_id"
-                                required >
+                                    <select class="form-select form-select-sm" name="statuses_id" id="edit_statuses_id">
+                                        <option selected disabled>--- Pilih Status ---</option>
+                                        @foreach ($status as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
                         </div>
                     </div>
                 </div>
