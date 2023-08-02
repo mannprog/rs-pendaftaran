@@ -20,4 +20,9 @@ class Status extends Model
     {
         return $this->hasMany(Tindakan::class);
     }
+
+    public function pendaftaran()
+    {
+        return $this->hasMany(Pendaftaran::class);
+    }
 }

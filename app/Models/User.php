@@ -43,4 +43,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(DetailPasien::class);
     }
+
+    public function pendaftaran()
+    {
+        return $this->hasMany(Pendaftaran::class);
+    }
 }

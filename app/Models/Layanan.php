@@ -15,4 +15,9 @@ class Layanan extends Model
     {
         return $this->hasMany(Dokter::class);
     }
+
+    public function pendaftaran()
+    {
+        return $this->hasMany(Pendaftaran::class);
+    }
 }

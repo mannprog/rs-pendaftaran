@@ -40,7 +40,7 @@
                                     :
                                 </div>
                                 <div class="col-6 col-lg-9">
-                                    RKM-{{ $data->detailpasien->no_rkm }}
+                                    {{ $data->detailpasien->no_rkm }}
                                 </div>
                             </div>
                             <div class="row align-items-center">

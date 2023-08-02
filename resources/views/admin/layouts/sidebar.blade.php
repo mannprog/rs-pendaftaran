@@ -41,7 +41,7 @@
                                 class="ti ti-biohazard"></i></span><span class="pc-mtext">Tindakan</span></a>
                 </li>
                 <li class="pc-item">
-                    <a href="../elements/bc_typography.html" class="pc-link"><span class="pc-micon"><i
+                    <a href="{{ route('obat.index') }}" class="pc-link"><span class="pc-micon"><i
                                 class="ti ti-pill"></i></span><span class="pc-mtext">Obat</span></a>
                 </li>
 
@@ -49,7 +49,7 @@
                     <i class="ti ti-apps"></i>
                 </li>
                 <li class="pc-item">
-                    <a href="../elements/bc_typography.html" class="pc-link"><span class="pc-micon"><i
+                    <a href="{{ route('pendaftaran.index') }}" class="pc-link"><span class="pc-micon"><i
                                 class="ti ti-receipt"></i></span><span class="pc-mtext">Pendaftaran</span></a>
                 </li>
 

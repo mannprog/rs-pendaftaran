@@ -2,15 +2,17 @@
 
 namespace App\DataTables;
 
+use Carbon\Carbon;
 use App\Models\Pendaftaran;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use App\Models\User;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class PendaftaranDataTable extends DataTable
 {
@@ -22,8 +24,25 @@ class PendaftaranDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'pendaftaran.action')
-            ->setRowId('id');
+        ->addIndexColumn()
+        ->addColumn('nama', function ($row) {
+            $user = User::where('id', $row->user_id)->first();
+
+            return $user->name;
+        })
+        ->rawColumns(['nama'])
+        ->addColumn('tgl_kunjungan', function ($row) {
+            return Carbon::parse($row->waktu_kunjungan)->format('d M Y');
+        })
+        ->rawColumns(['tgl_kunjungan'])
+        ->addColumn('jam_kunjungan', function ($row) {
+            return Carbon::parse($row->waktu_kunjungan)->format('H:i');
+        })
+        ->rawColumns(['jam_kunjungan'])
+        ->addColumn('action', function ($row) {
+            return view('admin.pages.pendaftaran.component.action', compact('row'))->render();
+        })
+        ->rawColumns(['action']);
     }
 
     /**
@@ -31,7 +50,8 @@ class PendaftaranDataTable extends DataTable
      */
     public function query(Pendaftaran $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()
+        ->with(['user', 'layanan', 'status']);
     }
 
     /**
@@ -44,7 +64,11 @@ class PendaftaranDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->addColumnDef([
+                        'responsivePriority' => 1,
+                        'targets' => 1,
+                    ])
+                    ->orderBy(1, 'asc')
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -62,15 +86,38 @@ class PendaftaranDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('DT_RowIndex')
+                ->title('No')
+                ->searchable(false)
+                ->orderable(false)
+                ->addClass("text-sm font-weight-normal")
+                ->addClass('text-center'),
+            Column::make('nama')
+                ->addClass("text-sm font-weight-normal text-wrap")
+                ->title('Nama Pasien'),
+            Column::make('no_daftar')
+                ->addClass("text-sm font-weight-normal text-wrap")
+                ->title('No Daftar'),
+            Column::make('tgl_daftar')
+                ->addClass("text-sm font-weight-normal text-wrap")
+                ->title('Tanggal Daftar'),
+            Column::make('layanan.nama')
+                ->addClass("text-sm font-weight-normal text-wrap")
+                ->title('Layanan'),
+            Column::make('tgl_kunjungan')
+                ->addClass("text-sm font-weight-normal text-wrap")
+                ->title('Tanggal Kunjungan'),
+            Column::make('jam_kunjungan')
+                ->addClass("text-sm font-weight-normal text-wrap")
+                ->title('Tanggal Kunjungan'),
+            Column::make('status.nama')
+                ->addClass("text-sm font-weight-normal text-wrap")
+                ->title('Status'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+                ->exportable(false)
+                ->printable(false)
+                ->addClass("text-sm font-weight-normal")
+                ->addClass('text-center'),
         ];
     }
 

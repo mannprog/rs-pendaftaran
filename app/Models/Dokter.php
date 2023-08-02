@@ -15,4 +15,14 @@ class Dokter extends Model
     {
         return $this->belongsTo(Layanan::class);
     }
+
+    public function pendaftaran()
+    {
+        return $this->hasMany(Pendaftaran::class);
+    }
+
+    public function ptindakan()
+    {
+        return $this->hasMany(PendaftaranTindakan::class);
+    }
 }

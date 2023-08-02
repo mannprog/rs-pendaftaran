@@ -16,4 +16,14 @@ class Tindakan extends Model
     {
         return $this->belongsTo(Status::class);
     }
+
+    public function pendaftaran()
+    {
+        return $this->hasMany(Pendaftaran::class);
+    }
+
+    public function ptindakan()
+    {
+        return $this->hasOne(PendaftaranTindakan::class);
+    }
 }

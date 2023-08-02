@@ -62,7 +62,8 @@ class PasienController extends Controller
 
                 $user = User::updateOrCreate(['id' => $dataId], $datas);
 
-                $no_rkm = mt_rand(10000000, 99999999);
+                $randomNumber = mt_rand(10000000, 99999999);
+                $no_rkm = 'RKM-' . $randomNumber;
 
                 DetailPasien::create([
                     'user_id' => $user->id,
