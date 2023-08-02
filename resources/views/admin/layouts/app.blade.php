@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="{{ asset('admin') }}/css/style.css" id="main-style-link" />
     <link rel="stylesheet" href="{{ asset('admin') }}/css/style-preset.css" id="preset-style-link" />
 
-    @stack('styles')
+    @stack('custom-styles')
 </head>
 <!-- [Head] end -->
 <!-- [Body] Start -->
@@ -68,20 +68,23 @@
         </div>
     </footer>
     <!-- Required Js -->
-    <script src="{{ asset('admin') }}/js/plugins/popper.min.js"></script>
-    <script src="{{ asset('admin') }}/js/plugins/simplebar.min.js"></script>
-    <script src="{{ asset('admin') }}/js/plugins/bootstrap.min.js"></script>
-    <script src="{{ asset('admin') }}/js/config.js"></script>
-    <script src="{{ asset('admin') }}/js/pcoded.js"></script>
+    <script src="{{ asset('admin/js/plugins/popper.min.js') }}"></script>
+    <script src="{{ asset('admin/js/plugins/simplebar.min.js') }}"></script>
+    <script src="{{ asset('admin/js/plugins/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('admin/js/config.js') }}"></script>
+    <script src="{{ asset('admin/js/pcoded.js') }}"></script>
 
 
     <!-- [Page Specific JS] start -->
-    <!-- Apex Chart -->
-    <script src="{{ asset('admin') }}/js/plugins/apexcharts.min.js"></script>
-    <script src="{{ asset('admin') }}/js/pages/dashboard-default.js"></script>
+    <script src="{{ asset('admin/cdn/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('admin/js/pages/dashboard-default.js') }}"></script>
     <!-- [Page Specific JS] end -->
 
-    @stack('scripts')
+    <!-- SweetAlert2 -->
+    <script src="{{ asset('admin/cdn/http_cdn.jsdelivr.net_npm_sweetalert2@11.js') }}"></script>
+    <script src="{{ asset('admin/cdn/http_cdnjs.cloudflare.com_ajax_libs_toastr.js_latest_toastr.min.js') }}"></script>
+
+    @stack('custom-scripts')
 </body>
 <!-- [Body] end -->
 

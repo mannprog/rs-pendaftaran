@@ -13,7 +13,7 @@
 
     <!-- Favicons -->
     <link href="<?php echo e(asset('homepage')); ?>/img/LOGO.png" rel="icon">
-    <link href="<?php echo e(asset('homepage')); ?>/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="<?php echo e(asset('homepage')); ?>/img/LOGO.png" rel="apple-touch-icon">
     <!-- [Google Font] Family -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
         id="main-font-link" />

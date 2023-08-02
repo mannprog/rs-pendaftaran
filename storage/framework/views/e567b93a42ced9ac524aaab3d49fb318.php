@@ -3,7 +3,7 @@
 <!-- [Head] start -->
 
 <head>
-    <title>SignUp | Berry Bootstrap 5 Admin Template</title>
+    <title>RSUHARKEL | Registrasi</title>
     <!-- [Meta] -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
@@ -13,7 +13,7 @@
 
     <!-- Favicons -->
     <link href="<?php echo e(asset('homepage')); ?>/img/LOGO.png" rel="icon">
-    <link href="<?php echo e(asset('homepage')); ?>/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="<?php echo e(asset('homepage')); ?>/img/LOGO.png" rel="apple-touch-icon">
     <!-- [Google Font] Family -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
         id="main-font-link" />

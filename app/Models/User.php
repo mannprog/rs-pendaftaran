@@ -39,7 +39,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function detailPasien()
+    public function detailpasien()
     {
         return $this->hasOne(DetailPasien::class);
     }

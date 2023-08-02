@@ -244,3 +244,8 @@
         <!-- [ sample-page ] end -->
     </div>
 @endsection
+
+@push('custom-scripts')
+    <!-- Apex Chart -->
+    <script src="{{ asset('admin/js/plugins/apexcharts.min.js') }}"></script>
+@endpush

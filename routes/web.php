@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PasienController;
+use App\Http\Controllers\PetugasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,8 +64,10 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::middleware('admin')->group(function () {
         Route::get('dashboard', [DashboardController::class, 'indexAdmin'])->name('admin.dashboard');
-        Route::prefix('admin/')->group(function () {
-            Route::name('admin.')->group(function () {
+        Route::prefix('users/')->group(function () {
+            Route::name('users.')->group(function () {
+                Route::resource('petugas', PetugasController::class);
+                Route::resource('pasien', PasienController::class);
             });
         });
     });

@@ -140,7 +140,8 @@
                 <li class="dropdown pc-h-item header-user-profile">
                     <a class="pc-head-link head-link-primary dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown"
                         href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="{{ asset('admin') }}/images/user/avatar-2.jpg" alt="user-image" class="user-avtar" />
+                        <img src="{{ asset('admin/images/user/' . auth()->user()->foto) }}" alt="user-image"
+                            class="user-avtar" />
                         <span>
                             <i class="ti ti-settings"></i>
                         </span>

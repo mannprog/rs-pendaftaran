@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="<?php echo e(asset('admin')); ?>/css/style.css" id="main-style-link" />
     <link rel="stylesheet" href="<?php echo e(asset('admin')); ?>/css/style-preset.css" id="preset-style-link" />
 
-    <?php echo $__env->yieldPushContent('styles'); ?>
+    <?php echo $__env->yieldPushContent('custom-styles'); ?>
 </head>
 <!-- [Head] end -->
 <!-- [Body] Start -->
@@ -68,20 +68,23 @@
         </div>
     </footer>
     <!-- Required Js -->
-    <script src="<?php echo e(asset('admin')); ?>/js/plugins/popper.min.js"></script>
-    <script src="<?php echo e(asset('admin')); ?>/js/plugins/simplebar.min.js"></script>
-    <script src="<?php echo e(asset('admin')); ?>/js/plugins/bootstrap.min.js"></script>
-    <script src="<?php echo e(asset('admin')); ?>/js/config.js"></script>
-    <script src="<?php echo e(asset('admin')); ?>/js/pcoded.js"></script>
+    <script src="<?php echo e(asset('admin/js/plugins/popper.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('admin/js/plugins/simplebar.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('admin/js/plugins/bootstrap.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('admin/js/config.js')); ?>"></script>
+    <script src="<?php echo e(asset('admin/js/pcoded.js')); ?>"></script>
 
 
     <!-- [Page Specific JS] start -->
-    <!-- Apex Chart -->
-    <script src="<?php echo e(asset('admin')); ?>/js/plugins/apexcharts.min.js"></script>
-    <script src="<?php echo e(asset('admin')); ?>/js/pages/dashboard-default.js"></script>
+    <script src="<?php echo e(asset('admin/cdn/jquery/dist/jquery.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('admin/js/pages/dashboard-default.js')); ?>"></script>
     <!-- [Page Specific JS] end -->
 
-    <?php echo $__env->yieldPushContent('scripts'); ?>
+    <!-- SweetAlert2 -->
+    <script src="<?php echo e(asset('admin/cdn/http_cdn.jsdelivr.net_npm_sweetalert2@11.js')); ?>"></script>
+    <script src="<?php echo e(asset('admin/cdn/http_cdnjs.cloudflare.com_ajax_libs_toastr.js_latest_toastr.min.js')); ?>"></script>
+
+    <?php echo $__env->yieldPushContent('custom-scripts'); ?>
 </body>
 <!-- [Body] end -->
 
