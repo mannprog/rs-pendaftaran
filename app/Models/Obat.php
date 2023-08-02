@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-// use App\Models\Status;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Tindakan extends Model
+class Obat extends Model
 {
     use HasFactory;
 

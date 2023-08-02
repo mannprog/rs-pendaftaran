@@ -34,7 +34,8 @@ class TindakanDataTable extends DataTable
      */
     public function query(Tindakan $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()
+            ->with('status');
     }
 
     /**
@@ -47,7 +48,11 @@ class TindakanDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(1) ->addColumnDef([
+                        'responsivePriority' => 1,
+                        'targets' => 1,
+                    ])
+                    ->orderBy(1, 'asc')
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -80,7 +85,7 @@ class TindakanDataTable extends DataTable
             Column::make('tarif')
                 ->addClass("text-sm font-weight-normal text-wrap")
                 ->title('Tarif'),
-            Column::make('status')
+            Column::make('status.nama')
                 ->addClass("text-sm font-weight-normal text-wrap")
                 ->title('Status'),
             Column::computed('action')

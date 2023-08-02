@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tindakan;
-use InvalidArgumentException;
-use Illuminate\Support\Facades\DB;
-use App\DataTables\TindakanDataTable;
-use App\Http\Requests\StoreTindakanRequest;
-use App\Http\Requests\UpdateTindakanRequest;
+use App\DataTables\ObatDataTable;
+use App\Models\Obat;
+use App\Http\Requests\StoreObatRequest;
+use App\Http\Requests\UpdateObatRequest;
 
-class TindakanController extends Controller
+class ObatController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(TindakanDataTable $dataTable)
+    public function index(ObatDataTable $dataTable)
     {
-        return $dataTable->render('admin.pages.tindakan.index');
+        return $dataTable->render('admin.pages.obat.index');
     }
 
     /**
@@ -30,14 +28,14 @@ class TindakanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store()
+    public function store(StoreObatRequest $request)
     {
         $dataId = request('data_id');
 
         try {
             DB::transaction(function () use ($dataId) {
                 request()->validate([
-                    'nama' => 'required|max:255|unique:tindakans,nama',
+                    'nama' => 'required|max:255|unique:Obats,nama',
                     'tarif' => 'required|max:255|',
                     'statuses_id' => 'required|max:255|',
                 ]);
@@ -48,7 +46,7 @@ class TindakanController extends Controller
                     'statuses_id' => request('statuses_id'),
                 ];
 
-                Tindakan::updateOrCreate(['id' => $dataId], $datas);
+                Obat::updateOrCreate(['id' => $dataId], $datas);
             });
         } catch (InvalidArgumentException $e) {
             return response()->json([
@@ -57,14 +55,14 @@ class TindakanController extends Controller
         }
 
         return response()->json([
-            'message' => 'Data Tindakan berhasil disimpan',
+            'message' => 'Data Obat berhasil disimpan',
         ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Tindakan $tindakan)
+    public function show(Obat $obat)
     {
         //
     }
@@ -72,9 +70,9 @@ class TindakanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(String $id)
     {
-        $data = Tindakan::findOrFail($id);
+        $data = Obat::findOrFail($id);
 
         return response()->json($data);
     }
@@ -94,7 +92,7 @@ class TindakanController extends Controller
                     'statuses_id' => 'required',
                 ]);
 
-                $data = Tindakan::findOrFail($data_id);
+                $data = Obat::findOrFail($data_id);
                 $data->nama = request('nama');
                 $data->tarif = request('tarif');
                 $data->statuses_id = request('statuses_id');
@@ -107,17 +105,17 @@ class TindakanController extends Controller
         }
 
         return response()->json([
-            'message' => 'Data Tindakan berhasil diubah',
+            'message' => 'Data Obat berhasil diubah',
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(String $id)
     {
         try {
-            $data = Tindakan::findOrFail($id);
+            $data = Obat::findOrFail($id);
             $data->delete();
         } catch (InvalidArgumentException $e) {
             return response()->json([

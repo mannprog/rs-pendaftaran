@@ -18,6 +18,6 @@ class Status extends Model
 
     public function tindakan()
     {
-        return $this->hasOne(Tindakan::class);
+        return $this->hasMany(Tindakan::class);
     }
 }

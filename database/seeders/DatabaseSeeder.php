@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             LayanansSeeder::class,
             DoktersSeeder::class,
             TindakanSeeder::class,
+            ObatSeeder::class,
         ]);
     }
 }
