@@ -102,7 +102,7 @@ class PendaftaranPasienDataTable extends DataTable
                 ->title('Tanggal Kunjungan'),
             Column::make('jam_kunjungan')
                 ->addClass("text-sm font-weight-normal text-wrap")
-                ->title('Tanggal Kunjungan'),
+                ->title('Waktu Kunjungan'),
             Column::make('status.nama')
                 ->addClass("text-sm font-weight-normal text-wrap")
                 ->title('Status'),
