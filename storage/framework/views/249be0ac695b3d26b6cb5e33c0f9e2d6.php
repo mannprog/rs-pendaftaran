@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('content'); ?>
     <!-- [ breadcrumb ] start -->
     <div class="page-header">
