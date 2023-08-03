@@ -103,7 +103,23 @@
     <script src="{{ asset('admin') }}/js/plugins/bootstrap.min.js"></script>
     <script src="{{ asset('admin') }}/js/config.js"></script>
     <script src="{{ asset('admin') }}/js/pcoded.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="{{ asset('admin/cdn/http_cdn.jsdelivr.net_npm_sweetalert2@11.js') }}"></script>
+    <script src="{{ asset('admin/cdn/http_cdnjs.cloudflare.com_ajax_libs_toastr.js_latest_toastr.min.js') }}"></script>
 
+    <script>
+        $(document).ready(function() {
+            var successMessage = '{{ session('success') }}';
+
+            if (successMessage) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: successMessage,
+                });
+            }
+        });
+    </script>
 </body>
 <!-- [Body] end -->
 

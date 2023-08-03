@@ -8,6 +8,7 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\PendaftaranPasienController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\TindakanController;
 
@@ -84,6 +85,9 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('pasien', [DashboardController::class, 'indexPasien'])->name('pasien.dashboard');
+    Route::name('pasien.')->group(function () {
+        Route::resource('pasien/pendaftaran', PendaftaranPasienController::class);
+    });
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

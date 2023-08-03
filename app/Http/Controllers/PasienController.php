@@ -150,7 +150,7 @@ class PasienController extends Controller
         }
 
         return response()->json([
-            'message' => 'Data petugas berhasil diubah',
+            'message' => 'Data pasien berhasil diubah',
         ]);
     }
 
@@ -168,7 +168,7 @@ class PasienController extends Controller
             ], 400);
         }
         return response()->json([
-            'message' => 'Petugas berhasil dihapus',
+            'message' => 'Pasien berhasil dihapus',
         ]);
     }
 }

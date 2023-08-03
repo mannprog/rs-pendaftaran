@@ -1,7 +1,21 @@
 @extends('admin.layouts.app', ['title' => 'Dashboard'])
 
 @section('content')
-    <div class="row">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <div class="page-header-title">
+                        <h3 class="me-3">Dashboard</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+
+    {{-- <div class="row">
         <!-- [ sample-page ] start -->
         <div class="col-xl-4 col-md-6">
             <div class="card bg-secondary-dark dashnum-card text-white overflow-hidden">
@@ -242,7 +256,7 @@
             </div>
         </div>
         <!-- [ sample-page ] end -->
-    </div>
+    </div> --}}
 @endsection
 
 @push('custom-scripts')
