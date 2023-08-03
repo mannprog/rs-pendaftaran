@@ -56,8 +56,7 @@
                 <li class="pc-item pc-caption">
                     <i class="ti ti-receipt-2"></i>
                 </li>
-                <li class="pc-item"><a href="../other/sample-page.html" class="pc-link"><span class="pc-micon"><i
-                                class="ti ti-receipt-2"></i></span><span class="pc-mtext">Pembayaran</span></a></li>
+                
             </ul>
         </div>
     </div>
