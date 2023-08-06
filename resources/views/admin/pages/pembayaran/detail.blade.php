@@ -25,175 +25,134 @@
         <!-- [ sample-page ] start -->
         <div class="col-sm-12">
             <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h1 class="mb-0">INVOICE</h1>
+                    <a href="{{ route('invoice', $data->id) }}" target="_blank" class="btn btn-sm btn-primary shadow"><i
+                            class="ti ti-download"></i>
+                        Download</a>
+                </div>
                 <div class="card-body">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-lg-3 mb-3 mb-lg-0 text-center">
-                            <img src="{{ asset('admin/images/user/' . $data->user->foto) }}" class="img-fluid">
+                    <div class="mb-3 border-bottom pb-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="text-start">
+                                Nama Pasien: {{ $data->pendaftaran->user->name }}
+                            </div>
+                            <div class="text-end">
+                                Tanggal: {{ \Carbon\Carbon::parse($data->pendaftaran->waktu_kunjungan)->format('d M Y') }}
+                            </div>
                         </div>
-                        <div class="col-lg-9">
-                            <h1 class="border-bottom pb-2">{{ $data->user->name }}</h1>
-                            <div class="row align-items-center">
-                                <div class="col-5 col-lg-3">
-                                    No RKM
-                                </div>
-                                <div class="col-1 col-lg-1 text-center">
-                                    :
-                                </div>
-                                <div class="col-6 col-lg-8">
-                                    {{ $data->user->detailpasien->no_rkm }}
-                                </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="text-start">
+                                No Daftar: {{ $data->pendaftaran->no_daftar }}
                             </div>
-                            <div class="row align-items-center">
-                                <div class="col-5 col-lg-3">
-                                    Tempat, Tanggal Lahir
-                                </div>
-                                <div class="col-1 col-lg-1 text-center">
-                                    :
-                                </div>
-                                <div class="col-6 col-lg-8">
-                                    @if ($data->user->detailpasien->tempat_lahir !== null)
-                                        {{ $data->user->detailpasien->tempat_lahir }},
-                                        {{ \Carbon\Carbon::parse($data->user->detailpasien->tanggal_lahir)->format('d M Y') }}
-                                    @endif
-                                </div>
+                            <div class="text-end">
+                                Waktu: {{ \Carbon\Carbon::parse($data->pendaftaran->waktu_kunjungan)->format('H:i') }}
                             </div>
-                            <div class="row align-items-center">
-                                <div class="col-5 col-lg-3">
-                                    Alamat
-                                </div>
-                                <div class="col-1 col-lg-1 text-center">
-                                    :
-                                </div>
-                                <div class="col-6 col-lg-8">
-                                    {{ $data->user->detailpasien->alamat }}
-                                </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="text-start">
+                                Layanan: {{ $data->pendaftaran->layanan->nama }}
                             </div>
-                            <div class="row align-items-center">
-                                <div class="col-5 col-lg-3">
-                                    No Handphone
-                                </div>
-                                <div class="col-1 col-lg-1 text-center">
-                                    :
-                                </div>
-                                <div class="col-6 col-lg-8">
-                                    {{ $data->user->detailpasien->no_hp }}
-                                </div>
-                            </div>
-                            <div class="row align-items-center">
-                                <div class="col-5 col-lg-3">
-                                    Status
-                                </div>
-                                <div class="col-1 col-lg-1 text-center">
-                                    :
-                                </div>
-                                <div class="col-6 col-lg-8">
-                                    {{ $data->user->detailpasien->status->nama }}
-                                </div>
+                            <div class="text-end">
+                                Status: @if ($data->status === 0)
+                                    Sudah Bayar
+                                @else
+                                    Belum Bayar
+                                @endif
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <!-- [ sample-page ] end -->
-    </div>
-    <!-- [ Main Content ] end -->
 
-    <!-- [ Main Content ] start -->
-    <div class="row">
-        <!-- [ sample-page ] start -->
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Dokter</th>
-                                    <th scope="col">Tarif</th>
-                                    <th scope="col">Tindakan</th>
-                                    <th scope="col">Tarif</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($ptindakan as $item)
+                    <div class="mb-3">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
                                     <tr>
-                                        <td>{{ $item->dokter->nama }}</td>
-                                        <td>{{ $item->dokter->tarif }}</td>
-                                        <td>{{ $item->tindakan->nama }}</td>
-                                        <td>{{ $item->tindakan->tarif }}</td>
+                                        <th scope="col" class="text-center">Keterangan</th>
+                                        <th scope="col" class="text-center">Harga</th>
+                                        <th scope="col" class="text-center">Jumlah</th>
+                                        <th scope="col" class="text-center">Sub Total</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- [ sample-page ] end -->
-    </div>
-    <!-- [ Main Content ] end -->
-
-    <!-- [ Main Content ] start -->
-    <div class="row">
-        <!-- [ sample-page ] start -->
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-body">
-                    <button type="button" class="btn btn-sm btn-primary shadow mb-4" data-bs-toggle="modal"
-                        data-bs-target="#addData{{ $data->id }}"><i class="ti ti-pencil"></i>
-                        Obat</button>
-                    @include('admin.pages.pembayaran.component.addData')
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="text-center">#</th>
-                                    <th scope="col" class="text-center">Nama Obat</th>
-                                    <th scope="col" class="text-center">Expired</th>
-                                    <th scope="col" class="text-center">Harga Satuan</th>
-                                    <th scope="col" class="text-center">Kuantiti</th>
-                                    <th scope="col" class="text-center">Sub Harga</th>
-                                    <th scope="col" class="text-center">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                    $totalSubHarga = 0;
-                                @endphp
-
-                                @foreach ($pembayarans as $item)
+                                </thead>
+                                <tbody>
                                     @php
-                                        $subHarga = $item->obat->harga_jual * $item->qty;
-                                        $totalSubHarga += $subHarga;
+                                        $jumlah = 1;
+                                        $subTarif = 0;
+                                        $subHarga = 0;
+                                        $totalHarga = 0;
+                                    @endphp
+
+                                    @foreach ($ptindakans as $item)
+                                        @php
+                                            $subTarif = $item->dokter->tarif * $jumlah;
+                                        @endphp
+                                        <tr>
+                                            <td><b>{{ $item->tindakan->nama }}</b><br>({{ $item->dokter->nama }})</td>
+                                            <td class="text-center">{{ $item->dokter->tarif }}</td>
+                                            <td class="text-center">{{ $jumlah }}</td>
+                                            <td class="text-center">{{ $subTarif }}</td>
+                                        </tr>
+                                    @endforeach
+
+                                    @foreach ($pobats as $item)
+                                        @php
+                                            $subHarga = $item->obat->harga_jual * $item->qty;
+                                        @endphp
+                                        <tr>
+                                            <td>{{ $item->obat->nama }}</td>
+                                            <td class="text-center">{{ $item->obat->harga_jual }}</td>
+                                            <td class="text-center">{{ $item->qty }}</td>
+                                            <td class="text-center">{{ $subHarga }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                                <tfoot>
+                                    @php
+                                        $totalHarga = $subTarif + $subHarga;
                                     @endphp
                                     <tr>
-                                        <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $item->obat->nama }}</td>
-                                        <td class="text-center">
-                                            {{ \Carbon\Carbon::parse($item->obat->exp)->format('d M Y') }}</td>
-                                        <td class="text-center">{{ $item->obat->harga_jual }}</td>
-                                        <td class="text-center">{{ $item->qty }}</td>
-                                        <td class="text-center">{{ $subHarga }}</td>
-                                        <td class="text-center">
-                                            <form action="{{ route('del.obat', $item->id) }}" method="post"
-                                                enctype="multipart/form-data">
-                                                @csrf
-                                                <button type="submit" class="btn btn-sm btn-danger shadow-sm"><i
-                                                        class="ti ti-trash"></i></button>
-                                            </form>
-                                        </td>
+                                        <td colspan="3" class="text-end"><b>Total:</b></td>
+                                        <td class="text-center">{{ $totalHarga }}</td>
                                     </tr>
-                                @endforeach
+                                </tfoot>
+                            </table>
 
-                                <tr>
-                                    <td colspan="5" class="text-end"><b>Total:</b></td>
-                                    <td class="text-center">{{ $totalSubHarga }}</td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ sample-page ] end -->
+    </div>
+    <!-- [ Main Content ] end -->
+
+    <!-- [ Main Content ] start -->
+    <div class="row">
+        <!-- [ sample-page ] start -->
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h1 class="mb-0">Bukti Pembayaran</h1>
+                    @if ($data->status === 0)
+                        <a href="#" class="btn btn-sm btn-secondary shadow disabled">Sudah Dikonfirmasi</a>
+                    @else
+                        <form action="{{ route('acc.bukti', $data->id) }}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-success shadow"><i class="ti ti-check"></i>
+                                Konfirmasi</button>
+                        </form>
+                    @endif
+                </div>
+                <div class="card-body">
+                    @if ($data->bukti_pembayaran == null)
+                        <div class="text-center mb-3">
+                            Belum ada pembayaran
+                        </div>
+                    @else
+                        <div class="d-flex align-items-center justify-content-center mb-3">
+                            <img src="{{ asset('admin/images/bukti/' . $data->bukti_pembayaran) }}" alt="">
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\DashboardDataTable;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -9,14 +10,14 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function indexAdmin()
+    public function indexAdmin(DashboardDataTable $dataTable)
     {
-        return view('admin.dashboard');
+        return $dataTable->render('admin.dashboard');
     }
 
-    public function indexPasien()
+    public function indexPasien(DashboardDataTable $dataTable)
     {
-        return view('pasien.dashboard');
+        return $dataTable->render('pasien.dashboard');
     }
 
     /**

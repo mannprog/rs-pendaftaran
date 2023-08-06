@@ -257,9 +257,40 @@
         </div>
         <!-- [ sample-page ] end -->
     </div> --}}
+
+    <!-- [ Main Content ] start -->
+    <div class="row">
+        <!-- [ sample-page ] start -->
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        {{ $dataTable->table(['class' => 'table align-items-center display responsive nowrap', 'width' => '100%']) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ sample-page ] end -->
+    </div>
+    <!-- [ Main Content ] end -->
 @endsection
 
-@push('custom-scripts')
+{{-- @push('custom-scripts')
     <!-- Apex Chart -->
     <script src="{{ asset('admin/js/plugins/apexcharts.min.js') }}"></script>
+@endpush --}}
+@push('custom-styles')
+    <link rel="stylesheet" href="{{ asset('admin/cdn/http_cdn.datatables.net_1.13.4_css_dataTables.bootstrap5.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('admin/cdn/http_cdn.datatables.net_responsive_2.4.1_css_responsive.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/cdn/http_cdnjs.cloudflare.com_ajax_libs_toastr.js_latest_toastr.css') }}">
+@endpush
+
+@push('custom-scripts')
+    <script src="{{ asset('admin/cdn/http_cdn.datatables.net_1.13.4_js_jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('admin/cdn/http_cdn.datatables.net_1.13.4_js_dataTables.bootstrap5.js') }}"></script>
+    <script src="{{ asset('admin/cdn/http_cdn.datatables.net_responsive_2.4.1_js_dataTables.responsive.js') }}"></script>
+    <script src="{{ asset('admin/cdn/http_cdn.datatables.net_responsive_2.4.1_js_responsive.bootstrap4.js') }}"></script>
+
+    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
 @endpush

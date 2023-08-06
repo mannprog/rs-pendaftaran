@@ -11,9 +11,9 @@ class Pembayaran extends Model
 
     protected $guarded = ['id'];
 
-    public function pendaftarantindakan()
+    public function pendaftaran()
     {
-        return $this->belongsTo(PendaftaranTindakan::class);
+        return $this->belongsTo(Pendaftaran::class);
     }
 
     public function obat()

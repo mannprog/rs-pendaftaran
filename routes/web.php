@@ -8,6 +8,7 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PembayaranPasienController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PendaftaranPasienController;
 use App\Http\Controllers\PetugasController;
@@ -87,11 +88,16 @@ Route::middleware('auth')->group(function () {
         Route::post('/pendaftaran/{pendaftaran}/add-obat', [PendaftaranController::class, 'addObat'])->name('add.obat');
         Route::post('/pendaftaran/{pendaftaran}/del-obat', [PendaftaranController::class, 'delObat'])->name('del.obat');
         Route::resource('pembayaran', PembayaranController::class);
+        Route::post('/pembayaran/{pembayaran}', [PembayaranController::class, 'accept'])->name('acc.bukti');
     });
+
+    Route::get('/pembayaran/{pembayaran}/invoice', [PembayaranController::class, 'invoice'])->name('invoice');
 
     Route::get('pasien', [DashboardController::class, 'indexPasien'])->name('pasien.dashboard');
     Route::name('pasien.')->group(function () {
         Route::resource('pasien/pendaftaran', PendaftaranPasienController::class);
+        Route::resource('pasien/pembayaran', PembayaranPasienController::class);
+        Route::post('pasien/pembayaran/{pembayaran}/upload', [PembayaranPasienController::class, 'bukti'])->name('upload');
     });
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

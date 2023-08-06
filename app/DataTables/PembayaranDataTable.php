@@ -28,54 +28,58 @@ class PembayaranDataTable extends DataTable
         return (new EloquentDataTable($query))
         ->addIndexColumn()
         ->addColumn('nama', function ($row) {
-            $pendaftaranTindakan = PendaftaranTindakan::where('id', $row->pendaftaran_tindakan_id)->first();
-            $pendaftaran = Pendaftaran::where('id', $pendaftaranTindakan->pendaftaran_id)->first();
+            $pendaftaran = Pendaftaran::where('id', $row->pendaftaran_id)->first();
 
             return $pendaftaran->user->name;
         })
         ->rawColumns(['nama'])
         ->addColumn('no_daftar', function ($row) {
-            $pendaftaranTindakan = PendaftaranTindakan::where('id', $row->pendaftaran_tindakan_id)->first();
-            $pendaftaran = Pendaftaran::where('id', $pendaftaranTindakan->pendaftaran_id)->first();
+            $pendaftaran = Pendaftaran::where('id', $row->pendaftaran_id)->first();
 
             return $pendaftaran->no_daftar;
         })
         ->rawColumns(['no_daftar'])
         ->addColumn('tgl_daftar', function ($row) {
-            $pendaftaranTindakan = PendaftaranTindakan::where('id', $row->pendaftaran_tindakan_id)->first();
-            $pendaftaran = Pendaftaran::where('id', $pendaftaranTindakan->pendaftaran_id)->first();
+            $pendaftaran = Pendaftaran::where('id', $row->pendaftaran_id)->first();
 
-            return $pendaftaran->tgl_daftar;
+            return Carbon::parse($pendaftaran->tgl_daftar)->format('d M Y');
         })
         ->rawColumns(['tgl_daftar'])
         ->addColumn('layanan', function ($row) {
-            $pendaftaranTindakan = PendaftaranTindakan::where('id', $row->pendaftaran_tindakan_id)->first();
-            $pendaftaran = Pendaftaran::where('id', $pendaftaranTindakan->pendaftaran_id)->first();
+            $pendaftaran = Pendaftaran::where('id', $row->pendaftaran_id)->first();
 
             return $pendaftaran->layanan->nama;
         })
         ->rawColumns(['layanan'])
         ->addColumn('tgl_kunjungan', function ($row) {
-            $pendaftaranTindakan = PendaftaranTindakan::where('id', $row->pendaftaran_tindakan_id)->first();
-            $pendaftaran = Pendaftaran::where('id', $pendaftaranTindakan->pendaftaran_id)->first();
+            $pendaftaran = Pendaftaran::where('id', $row->pendaftaran_id)->first();
             
-            return Carbon::parse($pendaftaran->tgl_kunjungan)->format('d M Y');
+            return Carbon::parse($pendaftaran->waktu_kunjungan)->format('d M Y');
         })
         ->rawColumns(['tgl_kunjungan'])
         ->addColumn('jam_kunjungan', function ($row) {
-            $pendaftaranTindakan = PendaftaranTindakan::where('id', $row->pendaftaran_tindakan_id)->first();
-            $pendaftaran = Pendaftaran::where('id', $pendaftaranTindakan->pendaftaran_id)->first();
+            $pendaftaran = Pendaftaran::where('id', $row->pendaftaran_id)->first();
             
-            return Carbon::parse($pendaftaran->jam_kunjungan)->format('H:i');
+            return Carbon::parse($pendaftaran->waktu_kunjungan)->format('H:i');
         })
         ->rawColumns(['jam_kunjungan'])
         ->addColumn('status', function ($row) {
-            $pendaftaranTindakan = PendaftaranTindakan::where('id', $row->pendaftaran_tindakan_id)->first();
-            $pendaftaran = Pendaftaran::where('id', $pendaftaranTindakan->pendaftaran_id)->first();
+            $pendaftaran = Pendaftaran::where('id', $row->pendaftaran_id)->first();
 
             return $pendaftaran->status->nama;
         })
         ->rawColumns(['status'])
+        ->addColumn('status_pembayaran', function ($row) {
+            $acc = 'Sudah Bayar';
+            $dec = 'Belum Bayar';
+
+            if ($row->status === 0) {
+                return $acc;
+            } else {
+                return $dec;
+            }
+        })
+        ->rawColumns(['status_pembayaran'])
         ->addColumn('action', function ($row) {
             return view('admin.pages.pembayaran.component.action', compact('row'))->render();
         })
@@ -88,7 +92,7 @@ class PembayaranDataTable extends DataTable
     public function query(Pembayaran $model): QueryBuilder
     {
         return $model->newQuery()
-        ->with('pendaftarantindakan');
+        ->with('pendaftaran');
     }
 
     /**
@@ -150,6 +154,9 @@ class PembayaranDataTable extends DataTable
             Column::make('status')
                 ->addClass("text-sm font-weight-normal text-wrap")
                 ->title('Status'),
+            Column::make('status_pembayaran')
+                ->addClass("text-sm font-weight-normal text-wrap")
+                ->title('Status Pembayaran'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Obat;
 use App\Models\Dokter;
 use App\Models\Status;
 use App\Models\Layanan;
 use App\Models\Tindakan;
+use App\Models\Pembayaran;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
+use App\Models\PendaftaranObat;
 use Illuminate\Support\Facades\DB;
 use App\Models\PendaftaranTindakan;
 use App\DataTables\PendaftaranPasienDataTable;
@@ -36,8 +39,9 @@ class PendaftaranPasienController extends Controller
         try {
             DB::transaction(function () use ($dataId) {
                 request()->validate([
+                    'user_id' => 'required',
                     'layanan_id' => 'required',
-                    'waktu_kunjungan' => 'required',
+                    'waktu_kunjungan' => 'required|unique:pendaftarans,waktu_kunjungan',
                     'status_id' => 'required',
                 ]);
 
@@ -45,7 +49,7 @@ class PendaftaranPasienController extends Controller
                 $noDaftar = 'DFTR-' . $randomNumber;
 
                 $datas = [
-                    'user_id' => auth()->user()->id,
+                    'user_id' => request('user_id'),
                     'layanan_id' => request('layanan_id'),
                     'waktu_kunjungan' => request('waktu_kunjungan'),
                     'status_id' => request('status_id'),
@@ -53,7 +57,11 @@ class PendaftaranPasienController extends Controller
                     'tgl_daftar' => today(),
                 ];
 
-                Pendaftaran::updateOrCreate(['id' => $dataId], $datas);
+                $pendaftaran = Pendaftaran::updateOrCreate(['id' => $dataId], $datas);
+
+                Pembayaran::create([
+                    'pendaftaran_id' => $pendaftaran->id,
+                ]);
             });
         } catch (InvalidArgumentException $e) {
             return response()->json([
@@ -75,8 +83,10 @@ class PendaftaranPasienController extends Controller
         $dokter = Dokter::where('layanan_id', $data->layanan_id)->get();
         $tindakan = Tindakan::all();
         $ptindakan = PendaftaranTindakan::where('pendaftaran_id', $data->id)->get();
+        $obats = Obat::all();
+        $pobats = PendaftaranObat::where('pendaftaran_id', $data->id)->get();
 
-        return view('pasien.pages.pendaftaran.detail', compact(['data', 'dokter', 'tindakan', 'ptindakan']));
+        return view('pasien.pages.pendaftaran.detail', compact(['data', 'dokter', 'tindakan', 'ptindakan', 'obats', 'pobats']));
     }
 
     /**

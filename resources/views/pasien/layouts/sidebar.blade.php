@@ -23,6 +23,13 @@
                     <a href="{{ route('pasien.pendaftaran.index') }}" class="pc-link"><span class="pc-micon"><i
                                 class="ti ti-receipt"></i></span><span class="pc-mtext">Pendaftaran</span></a>
                 </li>
+
+                <li class="pc-item pc-caption">
+                    <i class="ti ti-receipt-2"></i>
+                </li>
+                <li class="pc-item"><a href="{{ route('pasien.pembayaran.index') }}" class="pc-link"><span
+                            class="pc-micon"><i class="ti ti-receipt-2"></i></span><span
+                            class="pc-mtext">Pembayaran</span></a></li>
             </ul>
         </div>
     </div>
