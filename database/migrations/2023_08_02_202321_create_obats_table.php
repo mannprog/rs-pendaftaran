@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('harga_jual');
             $table->string('harga_beli');
             $table->string('exp');
-            $table->unsignedBigInteger('statuses_id');
-            $table->foreign('statuses_id')->references('id')->on('statuses')->onDelete('restrict');
+            $table->unsignedBigInteger('status_id');
+            $table->foreign('status_id')->references('id')->on('statuses')->onDelete('restrict');
             $table->timestamps();
         });
     }

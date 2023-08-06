@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Obat;
 use App\Models\User;
+use App\Models\Dokter;
 use App\Models\Status;
 use App\Models\Layanan;
+use App\Models\Tindakan;
+use App\Models\Pembayaran;
+use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
 use Illuminate\Support\Facades\DB;
-use App\DataTables\PendaftaranDataTable;
-use App\Models\Dokter;
-use App\Models\Pendaftaran;
 use App\Models\PendaftaranTindakan;
-use App\Models\Tindakan;
+use App\DataTables\PendaftaranDataTable;
+use App\Models\PendaftaranObat;
 
 class PendaftaranController extends Controller
 {
@@ -40,7 +43,7 @@ class PendaftaranController extends Controller
                 request()->validate([
                     'user_id' => 'required',
                     'layanan_id' => 'required',
-                    'waktu_kunjungan' => 'required',
+                    'waktu_kunjungan' => 'required|unique:pendaftarans,waktu_kunjungan',
                     'status_id' => 'required',
                 ]);
 
@@ -56,7 +59,11 @@ class PendaftaranController extends Controller
                     'tgl_daftar' => today(),
                 ];
 
-                Pendaftaran::updateOrCreate(['id' => $dataId], $datas);
+                $pendaftaran = Pendaftaran::updateOrCreate(['id' => $dataId], $datas);
+
+                Pembayaran::create([
+                    'pendaftaran_id' => $pendaftaran->id,
+                ]);
             });
         } catch (InvalidArgumentException $e) {
             return response()->json([
@@ -78,8 +85,10 @@ class PendaftaranController extends Controller
         $dokter = Dokter::where('layanan_id', $data->layanan_id)->get();
         $tindakan = Tindakan::all();
         $ptindakan = PendaftaranTindakan::where('pendaftaran_id', $data->id)->get();
+        $obats = Obat::all();
+        $pobats = PendaftaranObat::where('pendaftaran_id', $data->id)->get();
 
-        return view('admin.pages.pendaftaran.detail', compact(['data', 'dokter', 'tindakan', 'ptindakan']));
+        return view('admin.pages.pendaftaran.detail', compact(['data', 'dokter', 'tindakan', 'ptindakan', 'obats', 'pobats']));
     }
 
     public function addData()
@@ -93,19 +102,20 @@ class PendaftaranController extends Controller
                     'tindakan_id' => 'required',
                 ]);
 
-                PendaftaranTindakan::create([
+                // $pendaftaran = PendaftaranTindakan::where('pendaftaran_id', $dataId)->first();
+                // $pendaftaran->dokter_id = request('dokter_id');
+                // $pendaftaran->tindakan_id = request('tindakan_id');
+                // $pendaftaran->save();
+
+                $pendaftaran = PendaftaranTindakan::create([
                     'pendaftaran_id' => $dataId,
                     'dokter_id' => request('dokter_id'),
                     'tindakan_id' => request('tindakan_id'),
                 ]);
 
-                // $tindakan = PendaftaranTindakan::where('pendaftaran_id', $dataId)->first();
-                // if (!$tindakan) {
-                //     $tindakan = new PendaftaranTindakan();
-                //     $tindakan->pendaftaran_id = $dataId;
-                //     $tindakan->dokter_id = request('dokter_id');
-                //     $tindakan->tindakan_id = request('tindakan_id');
-                // }
+                // Pembayaran::create([
+                //     'pendaftaran_tindakan_id' => $pendaftaran->id,
+                // ]);
             });
         } catch (InvalidArgumentException $e) {
             $message = $e->getMessage();
@@ -113,6 +123,61 @@ class PendaftaranController extends Controller
         }
 
         return redirect()->back()->with('success', 'Data tindakan berhasil ditambahkan');
+    }
+
+    public function delData($id)
+    {
+        try {
+            DB::transaction(function () use ($id) {
+
+                $data = PendaftaranTindakan::findOrFail($id);
+                $data->delete();
+            });
+        } catch (InvalidArgumentException $e) {
+            $message = $e->getMessage();
+            return redirect()->back()->with('success', $message);
+        }
+
+        return redirect()->back()->with('success', 'Data tindakan berhasil dihapus');
+    }
+
+    public function addObat()
+    {
+        try {
+            DB::transaction(function () {
+                request()->validate([
+                    'obat_id' => 'required',
+                    'qty' => 'required',
+                ]);
+
+                PendaftaranObat::create([
+                    'pendaftaran_id' => request('data_id'),
+                    'obat_id' => request('obat_id'),
+                    'qty' => request('qty'),
+                ]);
+            });
+        } catch (InvalidArgumentException $e) {
+            $message = $e->getMessage();
+            return redirect()->back()->with('success', $message);
+        }
+
+        return redirect()->back()->with('success', 'Data obat berhasil ditambahkan');
+    }
+
+    public function delObat($id)
+    {
+        try {
+            DB::transaction(function () use ($id) {
+
+                $data = PendaftaranObat::findOrFail($id);
+                $data->delete();
+            });
+        } catch (InvalidArgumentException $e) {
+            $message = $e->getMessage();
+            return redirect()->back()->with('success', $message);
+        }
+
+        return redirect()->back()->with('success', 'Data obat berhasil dihapus');
     }
 
     /**

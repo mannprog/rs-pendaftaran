@@ -131,7 +131,7 @@
                     $('#edit_harga_jual').val(data.harga_jual);
                     $('#edit_harga_beli').val(data.harga_beli);
                     $('#edit_exp').val(data.exp);
-                    $('#edit_statuses_id').val(data.statuses_id);
+                    $('#edit_status_id').val(data.status_id);
                 })
             });
 

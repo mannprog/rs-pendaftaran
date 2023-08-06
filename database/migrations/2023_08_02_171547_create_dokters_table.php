@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('hari');
             $table->string('jam');
             $table->string('tarif');
+            $table->string('foto')->default('default.png');
             $table->timestamps();
         });
     }

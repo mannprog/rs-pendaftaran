@@ -26,21 +26,24 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-12">
-                            <label for="stok_min" class="form-label">Stok Minimal<span class="text-danger">*</span></label>
+                            <label for="stok_min" class="form-label">Stok Minimal<span
+                                    class="text-danger">*</span></label>
                             <input type="number" class="form-control form-control-sm" id="stok_min" name="stok_min"
                                 required autofocus>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-12">
-                            <label for="harga_jual" class="form-label">Harga Jual<span class="text-danger">*</span></label>
+                            <label for="harga_jual" class="form-label">Harga Jual<span
+                                    class="text-danger">*</span></label>
                             <input type="number" class="form-control form-control-sm" id="harga_jual" name="harga_jual"
                                 required autofocus>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-12">
-                            <label for="harga_beli" class="form-label">Harga Beli<span class="text-danger">*</span></label>
+                            <label for="harga_beli" class="form-label">Harga Beli<span
+                                    class="text-danger">*</span></label>
                             <input type="number" class="form-control form-control-sm" id="harga_beli" name="harga_beli"
                                 required autofocus>
                         </div>
@@ -54,15 +57,15 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-12">
-                            <label for="statuses_id" class="form-label">Status<span class="text-danger">*</span></label>
-                            {{-- <input type="text" class="form-control form-control-sm" id="statuses_id" name="statuses_id" --}}
-                                {{-- required autofocus> --}}
-                                <select class="form-select form-select-sm" name="statuses_id" id="statuses_id">
-                                    <option selected disabled>--- Pilih Status ---</option>
-                                    @foreach ($status as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                                    @endforeach
-                                </select>
+                            <label for="status_id" class="form-label">Status<span class="text-danger">*</span></label>
+                            {{-- <input type="text" class="form-control form-control-sm" id="status_id" name="status_id" --}}
+                            {{-- required autofocus> --}}
+                            <select class="form-select form-select-sm" name="status_id" id="status_id">
+                                <option selected disabled>--- Pilih Status ---</option>
+                                @foreach ($status as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -102,34 +105,33 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-12">
-                            <label for="edit_stok" class="form-label">Stok<span
-                                    class="text-danger">*</span></label>
+                            <label for="edit_stok" class="form-label">Stok<span class="text-danger">*</span></label>
                             <input type="number" class="form-control form-control-sm" id="edit_stok" name="stok"
-                                required >
+                                required>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-12">
                             <label for="edit_stok_min" class="form-label">Stok Minimal<span
                                     class="text-danger">*</span></label>
-                            <input type="number" class="form-control form-control-sm" id="edit_stok_min" name="stok_min"
-                                required >
+                            <input type="number" class="form-control form-control-sm" id="edit_stok_min"
+                                name="stok_min" required>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-12">
                             <label for="edit_harga_jual" class="form-label">Harga Jual<span
                                     class="text-danger">*</span></label>
-                            <input type="number" class="form-control form-control-sm" id="edit_harga_jual" name="harga_jual"
-                                required >
+                            <input type="number" class="form-control form-control-sm" id="edit_harga_jual"
+                                name="harga_jual" required>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-12">
                             <label for="edit_harga_beli" class="form-label">Harga Beli<span
                                     class="text-danger">*</span></label>
-                            <input type="number" class="form-control form-control-sm" id="edit_harga_beli" name="harga_beli"
-                                required >
+                            <input type="number" class="form-control form-control-sm" id="edit_harga_beli"
+                                name="harga_beli" required>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -137,19 +139,19 @@
                             <label for="edit_exp" class="form-label">Expired<span
                                     class="text-danger">*</span></label>
                             <input type="date" class="form-control form-control-sm" id="edit_exp" name="exp"
-                                required >
+                                required>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-12">
-                            <label for="edit_statuses_id" class="form-label">Status<span
+                            <label for="edit_status_id" class="form-label">Status<span
                                     class="text-danger">*</span></label>
-                                    <select class="form-select form-select-sm" name="statuses_id" id="edit_statuses_id">
-                                        <option selected disabled>--- Pilih Status ---</option>
-                                        @foreach ($status as $item)
-                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                                        @endforeach
-                                    </select>
+                            <select class="form-select form-select-sm" name="status_id" id="edit_status_id">
+                                <option selected disabled>--- Pilih Status ---</option>
+                                @foreach ($status as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>

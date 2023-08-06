@@ -7,6 +7,7 @@ use App\Http\Controllers\DokterController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PendaftaranPasienController;
 use App\Http\Controllers\PetugasController;
@@ -82,6 +83,10 @@ Route::middleware('auth')->group(function () {
         Route::resource('obat', ObatController::class);
         Route::resource('pendaftaran', PendaftaranController::class);
         Route::post('/pendaftaran/{pendaftaran}/add-data', [PendaftaranController::class, 'addData'])->name('add.tindakan');
+        Route::post('/pendaftaran/{pendaftaran}/del-data', [PendaftaranController::class, 'delData'])->name('del.tindakan');
+        Route::post('/pendaftaran/{pendaftaran}/add-obat', [PendaftaranController::class, 'addObat'])->name('add.obat');
+        Route::post('/pendaftaran/{pendaftaran}/del-obat', [PendaftaranController::class, 'delObat'])->name('del.obat');
+        Route::resource('pembayaran', PembayaranController::class);
     });
 
     Route::get('pasien', [DashboardController::class, 'indexPasien'])->name('pasien.dashboard');

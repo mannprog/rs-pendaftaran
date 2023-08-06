@@ -25,7 +25,7 @@ class ObatDataTable extends DataTable
         return (new EloquentDataTable($query))
         ->addIndexColumn()
         ->addColumn('status', function ($row) {
-            $status = Status::where('id', $row->statuses_id)->first();
+            $status = Status::where('id', $row->status_id)->first();
 
             return $status->nama;
         })

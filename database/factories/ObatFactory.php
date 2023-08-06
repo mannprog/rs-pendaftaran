@@ -26,7 +26,7 @@ class ObatFactory extends Factory
             'harga_jual' => '50000',
             'harga_beli' => '40000',
             'exp' => Carbon::createFromFormat('Y-m-d', mt_rand(2024, 2050).'-'.mt_rand(1, 12).'-'.mt_rand(1, 30))->format('Y-m-d'),
-            'statuses_id' => mt_rand(1, 3),
+            'status_id' => mt_rand(1, 3),
         ];
     }
 }

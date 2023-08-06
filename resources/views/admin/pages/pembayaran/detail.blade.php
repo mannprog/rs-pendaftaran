@@ -1,4 +1,4 @@
-@extends('admin.layouts.app', ['title' => 'Detail Pendaftaran'])
+@extends('admin.layouts.app', ['title' => 'Detail Pembayaran'])
 
 @section('content')
     <!-- [ breadcrumb ] start -->
@@ -7,12 +7,12 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h3 class="me-3">Detail Pendaftaran</h3>
+                        <h3 class="me-3">Detail Pembayaran</h3>
                     </div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('pendaftaran.index') }}">Kelola Pendaftaran</a></li>
-                        <li class="breadcrumb-item" aria-current="page">Detail Pendaftaran</li>
+                        <li class="breadcrumb-item"><a href="{{ route('pembayaran.index') }}">Kelola Pembayaran</a></li>
+                        <li class="breadcrumb-item" aria-current="page">Detail Pembayaran</li>
                     </ul>
                 </div>
             </div>
@@ -105,51 +105,25 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    <button type="button" class="btn btn-sm btn-primary shadow mb-4" data-bs-toggle="modal"
-                        data-bs-target="#addData{{ $data->id }}"><i class="ti ti-pencil"></i>
-                        Tindakan</button>
-                    @include('admin.pages.pendaftaran.component.addData')
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="text-center">#</th>
-                                    <th scope="col" class="text-center">Dokter</th>
-                                    <th scope="col" class="text-center">Tindakan</th>
-                                    <th scope="col" class="text-center">Tarif</th>
-                                    <th scope="col" class="text-center">Aksi</th>
+                                    <th scope="col">Dokter</th>
+                                    <th scope="col">Tarif</th>
+                                    <th scope="col">Tindakan</th>
+                                    <th scope="col">Tarif</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @php
-                                    $totalTarif = 0;
-                                @endphp
-
                                 @foreach ($ptindakan as $item)
-                                    @php
-                                        $totalTarif += $item->tindakan->tarif;
-                                    @endphp
                                     <tr>
-                                        <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $item->dokter->nama }}</td>
-                                        <td class="text-center">{{ $item->tindakan->nama }}</td>
-                                        <td class="text-center">Rp. {{ $item->dokter->tarif }}</td>
-                                        <td class="text-center">
-                                            <form action="{{ route('del.tindakan', $item->id) }}" method="post"
-                                                enctype="multipart/form-data">
-                                                @csrf
-                                                <button type="submit" class="btn btn-sm btn-danger shadow-sm"><i
-                                                        class="ti ti-trash"></i></button>
-                                            </form>
-                                        </td>
+                                        <td>{{ $item->dokter->tarif }}</td>
+                                        <td>{{ $item->tindakan->nama }}</td>
+                                        <td>{{ $item->tindakan->tarif }}</td>
                                     </tr>
                                 @endforeach
-
-                                <tr>
-                                    <td colspan="3" class="text-end"><b>Total:</b></td>
-                                    <td class="text-center">Rp. {{ $totalTarif }}</td>
-                                    <td></td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -167,9 +141,9 @@
             <div class="card">
                 <div class="card-body">
                     <button type="button" class="btn btn-sm btn-primary shadow mb-4" data-bs-toggle="modal"
-                        data-bs-target="#addObat{{ $data->id }}"><i class="ti ti-pencil"></i>
+                        data-bs-target="#addData{{ $data->id }}"><i class="ti ti-pencil"></i>
                         Obat</button>
-                    @include('admin.pages.pendaftaran.component.addObat')
+                    @include('admin.pages.pembayaran.component.addData')
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -188,7 +162,7 @@
                                     $totalSubHarga = 0;
                                 @endphp
 
-                                @foreach ($pobats as $item)
+                                @foreach ($pembayarans as $item)
                                     @php
                                         $subHarga = $item->obat->harga_jual * $item->qty;
                                         $totalSubHarga += $subHarga;
@@ -198,9 +172,9 @@
                                         <td>{{ $item->obat->nama }}</td>
                                         <td class="text-center">
                                             {{ \Carbon\Carbon::parse($item->obat->exp)->format('d M Y') }}</td>
-                                        <td class="text-center">Rp. {{ $item->obat->harga_jual }}</td>
+                                        <td class="text-center">{{ $item->obat->harga_jual }}</td>
                                         <td class="text-center">{{ $item->qty }}</td>
-                                        <td class="text-center">Rp. {{ $subHarga }}</td>
+                                        <td class="text-center">{{ $subHarga }}</td>
                                         <td class="text-center">
                                             <form action="{{ route('del.obat', $item->id) }}" method="post"
                                                 enctype="multipart/form-data">
@@ -214,7 +188,7 @@
 
                                 <tr>
                                     <td colspan="5" class="text-end"><b>Total:</b></td>
-                                    <td class="text-center">Rp. {{ $totalSubHarga }}</td>
+                                    <td class="text-center">{{ $totalSubHarga }}</td>
                                     <td></td>
                                 </tr>
                             </tbody>

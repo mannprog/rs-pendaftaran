@@ -40,4 +40,14 @@ class Pendaftaran extends Model
     {
         return $this->hasOne(PendaftaranTindakan::class);
     }
+
+    public function pobat()
+    {
+        return $this->hasMany(PendaftaranObat::class);
+    }
+
+    public function pembayaran()
+    {
+        return $this->hasOne(Pembayaran::class);
+    }
 }

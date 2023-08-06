@@ -15,4 +15,9 @@ class Obat extends Model
     {
         return $this->belongsTo(Status::class);
     }
+
+    public function pobat()
+    {
+        return $this->hasMany(PendaftaranObat::class);
+    }
 }

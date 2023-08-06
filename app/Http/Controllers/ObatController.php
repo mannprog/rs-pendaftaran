@@ -45,7 +45,7 @@ class ObatController extends Controller
                     'harga_jual' => 'required|max:255|',
                     'harga_beli' => 'required|max:255|',
                     'exp' => 'required|max:255|',
-                    'statuses_id' => 'required|max:255|',
+                    'status_id' => 'required|max:255|',
                 ]);
 
                 $datas = [
@@ -55,7 +55,7 @@ class ObatController extends Controller
                     'harga_jual' => request('harga_jual'),
                     'harga_beli' => request('harga_beli'),
                     'exp' => request('exp'),
-                    'statuses_id' => request('statuses_id'),
+                    'status_id' => request('status_id'),
                 ];
 
                 Obat::updateOrCreate(['id' => $dataId], $datas);
@@ -105,7 +105,7 @@ class ObatController extends Controller
                     'harga_jual' => 'required|string',
                     'harga_beli' => 'required|string',
                     'exp' => 'required|string',
-                    'statuses_id' => 'required',
+                    'status_id' => 'required',
                 ]);
 
                 $data = Obat::findOrFail($data_id);
@@ -115,7 +115,7 @@ class ObatController extends Controller
                 $data->harga_jual = request('harga_jual');
                 $data->harga_beli = request('harga_beli');
                 $data->exp = request('exp');
-                $data->statuses_id = request('statuses_id');
+                $data->status_id = request('status_id');
                 $data->save();
             });
         } catch (InvalidArgumentException $e) {

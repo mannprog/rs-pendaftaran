@@ -53,6 +53,11 @@
                         <a href="{{ route('pendaftaran.index') }}" class="pc-link"><span class="pc-micon"><i
                                     class="ti ti-receipt"></i></span><span class="pc-mtext">Pendaftaran</span></a>
                     </li>
+                    <li class="pc-item pc-caption">
+                        <i class="ti ti-receipt-2"></i>
+                    </li>
+                    <li class="pc-item"><a href="{{ route('pembayaran.index') }}" class="pc-link"><span class="pc-micon"><i
+                                    class="ti ti-receipt-2"></i></span><span class="pc-mtext">Pembayaran</span></a></li>
                 @endcan
 
                 @can('pendaftaran')
@@ -66,11 +71,11 @@
                 @endcan
 
                 @can('kasir')
-                    {{-- <li class="pc-item pc-caption">
-                    <i class="ti ti-receipt-2"></i>
-                </li>
-                <li class="pc-item"><a href="../other/sample-page.html" class="pc-link"><span class="pc-micon"><i
-                                class="ti ti-receipt-2"></i></span><span class="pc-mtext">Pembayaran</span></a></li> --}}
+                    <li class="pc-item pc-caption">
+                        <i class="ti ti-receipt-2"></i>
+                    </li>
+                    <li class="pc-item"><a href="{{ route('pembayaran.index') }}" class="pc-link"><span class="pc-micon"><i
+                                    class="ti ti-receipt-2"></i></span><span class="pc-mtext">Pembayaran</span></a></li>
                 @endcan
             </ul>
         </div>
