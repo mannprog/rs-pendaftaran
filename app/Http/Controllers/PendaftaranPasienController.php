@@ -39,7 +39,6 @@ class PendaftaranPasienController extends Controller
         try {
             DB::transaction(function () use ($dataId) {
                 request()->validate([
-                    'user_id' => 'required',
                     'layanan_id' => 'required',
                     'waktu_kunjungan' => 'required|unique:pendaftarans,waktu_kunjungan',
                     'status_id' => 'required',
@@ -49,7 +48,7 @@ class PendaftaranPasienController extends Controller
                 $noDaftar = 'DFTR-' . $randomNumber;
 
                 $datas = [
-                    'user_id' => request('user_id'),
+                    'user_id' => auth()->user()->id,
                     'layanan_id' => request('layanan_id'),
                     'waktu_kunjungan' => request('waktu_kunjungan'),
                     'status_id' => request('status_id'),

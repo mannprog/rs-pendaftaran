@@ -11,11 +11,13 @@ use App\Models\Tindakan;
 use App\Models\Pembayaran;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use InvalidArgumentException;
+use App\Models\PendaftaranObat;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use App\Models\PendaftaranTindakan;
 use App\DataTables\PendaftaranDataTable;
-use App\Models\PendaftaranObat;
 
 class PendaftaranController extends Controller
 {
@@ -240,5 +242,21 @@ class PendaftaranController extends Controller
         return response()->json([
             'message' => 'Data Pendaftaran berhasil dihapus',
         ]);
+    }
+
+    public function export()
+    {
+        $data = Pendaftaran::all();
+
+        $pdf = Pdf::loadView('admin.pages.pendaftaran.export', compact('data'));
+
+        $pdfContent = $pdf->output();
+        $headers = [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="Pendaftaran.pdf"',
+            'Cache-Control' => 'public, max-age=60'
+        ];
+
+        return new Response($pdfContent, 200, $headers);
     }
 }

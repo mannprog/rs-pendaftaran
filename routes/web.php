@@ -83,6 +83,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('tindakan', TindakanController::class);
         Route::resource('obat', ObatController::class);
         Route::resource('pendaftaran', PendaftaranController::class);
+        Route::get('/laporan/pendaftaran', [PendaftaranController::class, 'export'])->name('pendaftaran.export');
         Route::post('/pendaftaran/{pendaftaran}/add-data', [PendaftaranController::class, 'addData'])->name('add.tindakan');
         Route::post('/pendaftaran/{pendaftaran}/del-data', [PendaftaranController::class, 'delData'])->name('del.tindakan');
         Route::post('/pendaftaran/{pendaftaran}/add-obat', [PendaftaranController::class, 'addObat'])->name('add.obat');
