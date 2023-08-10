@@ -42,7 +42,7 @@ class UserFactory extends Factory
         return $this->afterCreating(function (User $user) {
             if ($user->id == 4) {
                 $user->detailPasien()->create([
-                    'no_rkm' => fake('id_ID')->randomNumber(8),
+                    'no_rkm' => 'RKM-' . fake('id_ID')->randomNumber(8),
                     'tempat_lahir' => fake('id_ID')->city(),
                     'tanggal_lahir' => fake('id_ID')->date(),
                     'alamat' => fake('id_ID')->address(),

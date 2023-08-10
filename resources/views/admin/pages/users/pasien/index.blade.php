@@ -27,6 +27,9 @@
                 <div class="card-body">
                     <button id="createData" class="btn btn-sm btn-primary shadow mb-4"><i class="ti ti-plus"></i>
                         Tambah</button>
+                    <a href="{{ route('users.pasien.export') }}" class="btn btn-sm btn-info shadow mb-4" target="_blank"><i
+                            class="ti ti-download"></i>
+                        Export</a>
                     <div class="table-responsive">
                         {{ $dataTable->table(['class' => 'table align-items-center display responsive nowrap', 'width' => '100%']) }}
                     </div>

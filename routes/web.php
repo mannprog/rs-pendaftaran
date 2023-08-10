@@ -76,6 +76,7 @@ Route::middleware('auth')->group(function () {
             Route::name('users.')->group(function () {
                 Route::resource('petugas', PetugasController::class);
                 Route::resource('pasien', PasienController::class);
+                Route::get('/pasien-export', [PasienController::class, 'export'])->name('pasien.export');
             });
         });
         Route::resource('layanan', LayananController::class);

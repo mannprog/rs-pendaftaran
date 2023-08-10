@@ -6,7 +6,9 @@ use App\Models\User;
 use App\Models\Status;
 use App\Models\DetailPasien;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use InvalidArgumentException;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use App\DataTables\PasienDataTable;
 
@@ -170,5 +172,21 @@ class PasienController extends Controller
         return response()->json([
             'message' => 'Pasien berhasil dihapus',
         ]);
+    }
+
+    public function export()
+    {
+        $data = User::where('is_admin', 1)->has('detailpasien')->with('detailpasien')->get();
+
+        $pdf = Pdf::loadView('admin.pages.users.pasien.export', compact('data'));
+
+        $pdfContent = $pdf->output();
+        $headers = [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="Pasien.pdf"',
+            'Cache-Control' => 'public, max-age=60'
+        ];
+
+        return new Response($pdfContent, 200, $headers);
     }
 }

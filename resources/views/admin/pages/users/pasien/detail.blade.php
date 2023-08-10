@@ -33,24 +33,24 @@
                         <div class="col-lg-9">
                             <h1 class="border-bottom pb-2">{{ $data->name }}</h1>
                             <div class="row align-items-center">
-                                <div class="col-5 col-lg-2">
+                                <div class="col-5 col-lg-3">
                                     No RKM
                                 </div>
                                 <div class="col-1 col-lg-1 text-center">
                                     :
                                 </div>
-                                <div class="col-6 col-lg-9">
+                                <div class="col-6 col-lg-8">
                                     {{ $data->detailpasien->no_rkm }}
                                 </div>
                             </div>
                             <div class="row align-items-center">
-                                <div class="col-5 col-lg-2">
+                                <div class="col-5 col-lg-3">
                                     Tempat, Tanggal Lahir
                                 </div>
                                 <div class="col-1 col-lg-1 text-center">
                                     :
                                 </div>
-                                <div class="col-6 col-lg-9">
+                                <div class="col-6 col-lg-8">
                                     @if ($data->detailpasien->tempat_lahir !== null)
                                         {{ $data->detailpasien->tempat_lahir }},
                                         {{ \Carbon\Carbon::parse($data->detailpasien->tanggal_lahir)->format('d M Y') }}
@@ -58,35 +58,35 @@
                                 </div>
                             </div>
                             <div class="row align-items-center">
-                                <div class="col-5 col-lg-2">
+                                <div class="col-5 col-lg-3">
                                     Alamat
                                 </div>
                                 <div class="col-1 col-lg-1 text-center">
                                     :
                                 </div>
-                                <div class="col-6 col-lg-9">
+                                <div class="col-6 col-lg-8">
                                     {{ $data->detailpasien->alamat }}
                                 </div>
                             </div>
                             <div class="row align-items-center">
-                                <div class="col-5 col-lg-2">
+                                <div class="col-5 col-lg-3">
                                     No Handphone
                                 </div>
                                 <div class="col-1 col-lg-1 text-center">
                                     :
                                 </div>
-                                <div class="col-6 col-lg-9">
+                                <div class="col-6 col-lg-8">
                                     {{ $data->detailpasien->no_hp }}
                                 </div>
                             </div>
                             <div class="row align-items-center">
-                                <div class="col-5 col-lg-2">
+                                <div class="col-5 col-lg-3">
                                     Status
                                 </div>
                                 <div class="col-1 col-lg-1 text-center">
                                     :
                                 </div>
-                                <div class="col-6 col-lg-9">
+                                <div class="col-6 col-lg-8">
                                     {{ $data->detailpasien->status->nama }}
                                 </div>
                             </div>
